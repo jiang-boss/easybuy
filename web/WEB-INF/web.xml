@@ -45,7 +45,15 @@
         <servlet-name>CategoryServlet</servlet-name>
         <url-pattern>/manager/categoryServlet</url-pattern>
     </servlet-mapping>
-
+<!--    支付宝支付-->
+    <servlet>
+        <servlet-name>PayServlet</servlet-name>
+        <servlet-class>com.jiang.web.pre.PayServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PayServlet</servlet-name>
+        <url-pattern>/client/payServlet</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>com.jiang.web.ProductServlet</servlet-class>

@@ -69,8 +69,8 @@
             </div>
             <table border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="p_td" width="160">商品名称</td>
-                <td width="395">海贼王</td>
+                <td class="p_td" width="160">收件人</td>
+                <td width="395"></td>
                 <td class="p_td" width="160">电子邮件</td>
                 <td width="395">12345678@qq.com</td>
               </tr>
@@ -139,72 +139,25 @@
             	支付方式
             </div>
             <ul class="pay">
-                <li class="checked">余额支付<div class="ch_img"></div></li>
-                <li>银行亏款/转账<div class="ch_img"></div></li>
-                <li>货到付款<div class="ch_img"></div></li>
-                <li>支付宝<div class="ch_img"></div></li>
+                <li class="checked">支付宝<div class="ch_img"></div></li>
+<%--                <li>银行亏款/转账<div class="ch_img"></div></li>--%>
+<%--                <li>货到付款<div class="ch_img"></div></li>--%>
+<%--                <li>支付宝<div class="ch_img"></div></li>--%>
             </ul>
-            <div class="two_t">
-            	商品包装
-            </div>
-            <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="car_th" width="80"></td>
-                <td class="car_th" width="490">名称</td>
-                <td class="car_th" width="180">费用</td>
-                <td class="car_th" width="180">免费额度</td>
-                <td class="car_th" width="180">图片</td>
-              </tr>
-              <tr>
-              	<td align="center"><input type="checkbox" name="pack" checked="checked" /></td>
-                <td><b style="font-size:14px;">不要包装</b></td>
-                <td align="center">￥15.00</td>
-                <td align="center">￥0.00</td>
-                <td align="center"></td>
-              </tr>
-              <tr>
-              	<td align="center"><input type="checkbox" name="pack" /></td>
-                <td><b style="font-size:14px;">精品包装</b></td>
-                <td align="center">￥15.00</td>
-                <td align="center">￥0.00</td>
-                <td align="center"><a href="#" style="color:#ff4e00;">查看</a></td>
-              </tr>
-            </table> 
-            
-            <div class="two_t">
-            	祝福贺卡
-            </div>
-            <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="car_th" width="80"></td>
-                <td class="car_th" width="490">名称</td>
-                <td class="car_th" width="180">费用</td>
-                <td class="car_th" width="180">免费额度</td>
-                <td class="car_th" width="180">图片</td>
-              </tr>
-              <tr>
-              	<td align="center"><input type="checkbox" name="wish" checked="checked" /></td>
-                <td><b style="font-size:14px;">不要贺卡</b></td>
-                <td align="center">￥15.00</td>
-                <td align="center">￥0.00</td>
-                <td align="center"></td>
-              </tr>
-              <tr>
-              	<td align="center" style="border-bottom:0; padding-bottom:0;"><input type="checkbox" name="wish" /></td>
-                <td style="border-bottom:0; padding-bottom:0;"><b style="font-size:14px;">祝福贺卡</b></td>
-                <td align="center" style="border-bottom:0; padding-bottom:0;">￥15.00</td>
-                <td align="center" style="border-bottom:0; padding-bottom:0;">￥0.00</td>
-                <td align="center" style="border-bottom:0; padding-bottom:0;"><a href="#" style="color:#ff4e00;">查看</a></td>
-              </tr>
-              <tr valign="top">
-              	<td align="center"></td>
-                <td colspan="4">
-                	<span class="fl"><b style="font-size:14px;">祝福语：</b></span>
-                    <span class="fl"><textarea class="add_txt" style="width:860px; height:50px;"></textarea></span>
-                </td>
-              </tr>
-            </table> 
-            
+<%--            <div class="two_t">--%>
+<%--            	商品包装--%>
+<%--            </div>--%>
+<%--            <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">--%>
+<%--              <tr>--%>
+<%--                <td class="car_th" width="80"></td>--%>
+<%--                <td class="car_th" width="490">名称</td>--%>
+<%--                <td class="car_th" width="180">费用</td>--%>
+<%--                <td class="car_th" width="180">免费额度</td>--%>
+<%--                <td class="car_th" width="180">图片</td>--%>
+<%--              </tr>--%>
+<%--                --%>
+<%--            </table>--%>
+
             <div class="two_t">
             	其他信息
             </div>

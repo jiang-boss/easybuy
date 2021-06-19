@@ -14,27 +14,13 @@
     </script>
     <script type="text/javascript" src="static/js/shade.js"></script>
 
-<%--    <script type="text/javascript" src="static/js/jquery-1.11.1.min_044d0927.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/jquery.bxslider_e88acd1b.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/jquery-1.8.2.min.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/menu.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/select.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/lrscroll.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/iban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/fban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/f_ban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/mban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/bban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/hban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/tban.js"></script>--%>
-<%--    <script type="text/javascript" src="static/js/lrscroll_1.js"></script>--%>
     <script type="text/javascript">
         $(function (){
             // alert(dsdsd)
             $(".deleteCart").click(function (){
                 return  confirm("你确定删除该商品吗？")
             })
-            //
+            //这里处理商品数量的操作
             $(".car_btn_2").click(function (){
                 var obj=$(this).parent().find("input:first-child").next()
                 var num=parseInt(obj.val())
@@ -52,7 +38,7 @@
                 obj.change();
             })
             $(".car_ipt").change(function (){
-                //这里处理修改上商品数量的操作
+                //这里处理修改商品数量的操作
                 var id=$(this).attr("productId")
                 var count=$(this).val();
                 // alert(id)
@@ -113,7 +99,7 @@
                         <td align="center" style="color:#ff4e00;">${items.value.totalPrice}</td>
                         <td align="center">26R</td>
 <%--                        q清空商品项--%>
-                        <td align="center"><a class="deleteCart" href="client/cartServlet?action=deleteCartItem&id=${items.value.id}">删除</a>&nbsp; &nbsp;<a href="#">加入收藏</a></td>
+                        <td align="center"><a class="deleteCart"  href="client/cartServlet?action=deleteCartItem&id=${items.value.id}">删除</a>&nbsp; &nbsp;<a href="#">加入收藏</a></td>
                     </tr>
                 </c:forEach>
 
@@ -140,7 +126,6 @@
                 <span class="fr" style="margin-top:10px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')"><img src="static/images/close.gif" /></span>
             </div>
             <div class="notice_c">
-           		
                 <table border="0" align="center" style="font-size:16px;" cellspacing="0" cellpadding="0">
                   <tr valign="top">
                     <td>您确定要把该商品移除购物车吗？</td>
@@ -149,7 +134,6 @@
                     <td><a href="#" class="b_sure">确定</a><a href="#" class="b_buy">取消</a></td>
                   </tr>
                 </table>
-                    
             </div>
         </div>
     </div>    

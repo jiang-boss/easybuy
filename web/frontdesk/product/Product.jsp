@@ -61,7 +61,6 @@
                             $("#span3").text(data.totalPrice)
                         })
                     }
-
                     ShowDiv_1("MyDiv1","fade1")
                 })
             })
