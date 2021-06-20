@@ -2,8 +2,12 @@ package com.jiang.web;
 
 import com.google.gson.Gson;
 import com.jiang.pojo.User;
+import com.jiang.pojo.UserAddress;
+import com.jiang.pojo.pre.Address;
 import com.jiang.pojo.pre.Cart;
+import com.jiang.service.Impl.UserAddressServiceImpl;
 import com.jiang.service.Impl.UserServiceImpl;
+import com.jiang.service.UserAddressService;
 import com.jiang.service.UserService;
 import com.jiang.utils.webUtils;
 import com.ndktools.javamd5.Mademd5;
@@ -12,8 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +29,8 @@ import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 public class userServlet extends BaseServlet{
 
     UserService userService=new UserServiceImpl();
+    UserAddressService userAddressService=new UserAddressServiceImpl();
+
     /**
      * 处理注册的功能
      * @param req
@@ -54,7 +59,7 @@ public class userServlet extends BaseServlet{
             if(userService.exitUsername(username)){
                 req.setAttribute("msg","用户名"+username+"已存在！");
                 req.setAttribute("user",username);
-                //有错请求转发
+                //有请求转发
                 req.getRequestDispatcher("/frontdesk/User/Regist.jsp").forward(req,resp);
             }else {
                 System.out.println("用户名可用！");
@@ -93,15 +98,21 @@ public class userServlet extends BaseServlet{
             System.out.println("登录成功");
             //将登录的用户放到session中
             req.getSession().setAttribute("login",login);
+            //登录成功就把 该用户的所有地址都存放到Session中
+            List<UserAddress> addressList = userAddressService.getAddressList(login.getId());
+            req.getSession().setAttribute("addressList",addressList);
             if(type==1){
+                //管理员
                 Cart cart=new Cart();
                 req.getSession().setAttribute("cart",cart);
                 req.getRequestDispatcher("/backend/user/userInfo.jsp").forward(req,resp);
             }else {
+
                 Cart cart=new Cart();
                 req.getSession().setAttribute("cart",cart);
                 req.getRequestDispatcher("index.jsp").forward(req,resp);
             }
+
         }
         else {
             System.out.println("登陆失败");

@@ -13,21 +13,55 @@ public class UserAddress {
     private Integer id;//主键
     private Integer userId;//用户主键
     private String address;//地址
-    private Date createTime;//穿件时间
+    private Date createTime;//创建时间
     private Integer isDefault;
-    private String remark;
+    private String remark;  //描述
+    private String rename; //收货人
+    private String phone;  //收货电话
+    private String region;//所在区域
+    private String code;//邮政编号
 
     public UserAddress() {
 
     }
-    public UserAddress(Integer id, Integer userId, String address, Date createTime, Integer isDefault, String remark) {
+
+    public UserAddress(Integer id, Integer userId, String address, Date createTime, Integer isDefault, String remark,
+                       String rename, String phone, String region, String code) {
         this.id = id;
         this.userId = userId;
         this.address = address;
         this.createTime = createTime;
         this.isDefault = isDefault;
         this.remark = remark;
+        this.rename = rename;
+        this.phone = phone;
+        this.region = region;
+        this.code = code;
     }
+
+    public UserAddress(Integer id, Integer userId, String address, Date createTime, Integer isDefault, String remark, String rename, String phone, String region) {
+        this.id = id;
+        this.userId = userId;
+        this.address = address;
+        this.createTime = createTime;
+        this.isDefault = isDefault;
+        this.remark = remark;
+        this.rename = rename;
+        this.phone = phone;
+        this.region = region;
+    }
+
+    public UserAddress(Integer id, Integer userId, String address, Date createTime, Integer isDefault, String remark, String rename, String phone) {
+        this.id = id;
+        this.userId = userId;
+        this.address = address;
+        this.createTime = createTime;
+        this.isDefault = isDefault;
+        this.remark = remark;
+        this.rename = rename;
+        this.phone = phone;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -75,6 +109,38 @@ public class UserAddress {
         this.remark = remark;
     }
 
+    public String getRename() {
+        return rename;
+    }
+
+    public void setRename(String rename) {
+        this.rename = rename;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "UserAddress{" +
@@ -84,6 +150,9 @@ public class UserAddress {
                 ", createTime=" + createTime +
                 ", isDefault=" + isDefault +
                 ", remark='" + remark + '\'' +
+                ", rename='" + rename + '\'' +
+                ", phone='" + phone + '\'' +
+                ", region='" + region + '\'' +
                 '}';
     }
 }
