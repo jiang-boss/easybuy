@@ -71,7 +71,7 @@
     </script>
 </head>
 <body>
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@ include file="/common/backend/searchBar.jsp" %>
 <!--End Header End-->
 <div class="i_bg bg_color">
@@ -88,10 +88,11 @@
                  </c:if>
             </div>
             <br>
-            <form action="manager/productServlet" method="post">
+            <form action="manager/productServlet" method="get">
                 <input type="hidden" name="action" value="${param.method}" />
                 <input  type="hidden" name="pageNum" value="${param.pageNum}"/>
                 <input  type="hidden" name="id" value="${requestScope.product.id}"/>
+                <input  type="hidden" name="fileName" value="${requestScope.product.fileName}"/>
             <table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="135" align="right">一级分类</td>
@@ -101,10 +102,8 @@
                             <c:if test="${empty requestScope.product}">
                                 <option value="" selected="selected">请选择...</option>
                             </c:if>
-
-
                             <c:if test="${not empty requestScope.product}">
-                                <option value="" disabled selected hidden >${requestScope.threecate.cateOne}</option>
+                                <option selected hidden value="${requestScope.threecate.oneId}">${requestScope.threecate.cateOne}</option>
                             </c:if>
 <%--                                   遍历传过来的一级分类的选项--%>
                             <c:forEach items="${requestScope.cate1}" var="temp">
@@ -121,9 +120,8 @@
                                 <option value="" selected="selected">请选择...</option>
                             </c:if>
                             <c:if test="${not empty requestScope.product}">
-                                <option value="" disabled selected hidden>${requestScope.threecate.cateTwo}</option>
+                                <option value="${requestScope.threecate.twoId}" selected hidden>${requestScope.threecate.cateTwo}</option>
                             </c:if>
-
                         </select>
                     </td>
                 </tr>
@@ -135,7 +133,7 @@
                                 <option value="" selected="selected">请选择...</option>
                             </c:if>
                             <c:if test="${not empty requestScope.product}">
-                                <option value="" disabled selected hidden>${requestScope.threecate.cateThree}</option>
+                                <option value="${requestScope.threecate.threeId}" selected hidden>${requestScope.threecate.cateThree}</option>
                             </c:if>
                         </select>
                     </td>
@@ -150,9 +148,17 @@
                 <tr>
                     <td width="135" align="right">商品图片</td>
                     <td>
-                            <img src="files/${requestScope.product.fileName}" width="50" height="50"/>
 
-                        <input type="file" class="text" name="fileName" /><span></span>
+                        <c:if test="${requestScope.product.fileName==null}">
+                            <img id="fileImg" style="display: none" src="" width="50" height="50"/>
+                        </c:if>
+<%--                        <input type="file" id="file"  class="text" name="fileName"  /><span></span>--%>
+                        <c:if test="${requestScope.product.fileName!=null}">
+                            <img id="fileImg" src="files/${requestScope.product.fileName}" width="50" height="50"/>
+                        </c:if>
+                        <input type="button" value="选择文件" onclick="javascript:$('input[name=\'file\']').click();" />
+                        <input name="fileName" readonly />
+                        <input type="file" id="filesAdd" name="file" style="border: hidden; display: none;" onchange="javascript:$('input[name=\'fileName\']').val(this.files[0].name);" />
                     </td>
                 </tr>
                 <tr>
@@ -196,11 +202,15 @@
             return confirm("确认添加"+$("#name").val()+"吗?")
         })
         $("#btnupdate").click(function (){
+            // alert($("#productCategoryLevel1").val())
             return confirm("确认修改商品吗？")
+        })
+        $("#filesAdd").change(function (){
+            $("#fileImg").show()
+            $("#fileImg").attr("src",URL.createObjectURL($(this)[0].files[0]));
         })
     })
 </script>
-
 </body>
 </html>
 

@@ -9,7 +9,6 @@
     <script type="text/javascript" src="static/js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="static/js/menu.js"></script>
 	<script type="text/javascript" src="static/js/n_nav.js"></script>
-
     <script type="text/javascript" src="static/js/num.js">
     </script>
     <script type="text/javascript" src="static/js/shade.js"></script>
@@ -45,21 +44,38 @@
                 // alert(count);
                 location.href="http://localhost:8080/yimaiwang/client/cartServlet?action=updateCartItem&id="+id+"&count="+count;
             })
+            $("#clearCart").click(function (){
+                // alert($(this).prop("checked"))
+
+                $(".check_item").prop("checked",$(this).prop("checked"))
+                if ($(this).prop("checked")){
+                    $("#totalb").text($("#totala").text())
+                }else {
+                    $("#totalb").text("0")
+                }
+            })
+            $(".check_item").click(function (){
+                // alert($(this).prop("checked"))
+                var  flag=$(".check_item:checked").length==$(".check_item").attr("speice")
+                $("#clearCart").prop("checked",flag)
+                var totalPrice=0
+                $.each($(".check_item:checked"),function (){
+                 totalPrice+=parseInt($(this).attr("thisPrice"))
+                })
+                $("#totalb").text(totalPrice)
+            })
         })
     </script>
 <title>尤洪</title>
 </head>
 <body>  
 <!--Begin Header Begin-->
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@include file="/common/front/searchBar.jsp"%>
 <!--End Header End-->
-
-
 <!--Begin Menu Begin-->
 <%@include file="/common/front/menu.jsp"%>
 <!--End Menu End-->
-
 <div class="i_bg">  
     <div class="content mar_20">
     	<img src="static/images/img1.jpg" />
@@ -68,6 +84,7 @@
     <div class="content mar_20">
     	<table border="0" class="car_tab" style="width:1200px; margin-bottom:50px;" cellspacing="0" cellpadding="0">
           <tr>
+              <th></th>
             <td class="car_th" width="490">商品名称</td>
 <%--            <td class="car_th" width="140">属性</td>--%>
             <td class="car_th" width="150">购买数量</td>
@@ -85,6 +102,7 @@
 
                 <c:forEach items="${sessionScope.cart.cartItemMap}" var="items" >
                     <tr class="car_tr">
+                        <td><input class="check_item" value="${items.value.id}" thisPrice="${items.value.totalPrice}" speice="${sessionScope.cart.species}" type="checkbox"/></td>
                         <td style="text-align: center">
                             <div class="c_s_img"><img src="files/${items.value.fileName}" width="60" height="73" /></div>
                             ${items.value.name}
@@ -103,21 +121,28 @@
                     </tr>
                 </c:forEach>
 
-          <tr height="70">
-          	<td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
-            	<label class="r_rad"><input type="checkbox" name="clear" checked="checked" /></label><label class="r_txt">清空购物车</label>
-                <span class="fr">商品总价：<b style="font-size:22px; color:#ff4e00;">${sessionScope.cart.totalPrice}</b></span>
-            </td>
-          </tr>
+                <tr height="50">
+                    <td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
+                        <label class="r_rad"><input id="clearCart" type="checkbox" name="clear"/></label><label
+                            class="r_txt">清空购物车</label>
+                        <span class="fr">商品总价:￥<b id="totala"
+                                style="font-size:22px; color:#ff4e00;">${sessionScope.cart.totalPrice}</b></span>
+                    </td>
+                </tr>
+                <tr height="20">
+                    <td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
+                        <span class="fr">选中价格：￥<b id="totalb" style="font-size:15px; color:#ff4e00;">0</b></span>
+                    </td>
+                </tr>
           <tr valign="top" height="150">
           	<td colspan="6" align="right">
-            	<a href="index.jsp"><img src="static/images/buy1.gif" /></a>&nbsp; &nbsp; <a href="frontdesk/buycar/BuyCar_Two.jsp"><img src="static/images/buy2.gif" /></a>
+            	<a href="index.jsp"><img src="static/images/buy1.gif" /></a>&nbsp; &nbsp; <a id="buyCar"  ><img src="static/images/buy2.gif" /></a>
             </td>
           </tr>
             </c:if>
         </table>
     </div>
-	<!--End 第一步：查看购物车 End-->
+	<!--End 第一步：查看购物车 End frontdesk/buycar/BuyCar_Two.jsp-->
     <!--Begin 弹出层-删除商品 Begin-->
     <div id="fade" class="black_overlay"></div>
     <div id="MyDiv" class="white_content">             
@@ -142,6 +167,34 @@
     <%@include file="/common/front/footer.jsp"%>
     <!--End Footer End -->
 </div>
+<script type="text/javascript">
+    $(function (){
+        $("#buyCar").click(function (){
+            if ($(".check_item:checked").length==0){
+                alert("请选择要购买的商品！")
+            }else{
+                var productsId=""
+                var productsIdNotCheck=""
+                $.each($(".check_item:checked"),function (){
+                    // alert($(this).val()
+                    productsId+=$(this).val()+","
+                })
+                productsIds=productsId.substring(0,productsId.length-1)
+                $.each($(".check_item:not(:checked)"),function (){
+                    // alert($(this).val()
+                    productsIdNotCheck+=$(this).val()+","
+                })
+                productsIdnot=productsIdNotCheck.substring(0,productsIdNotCheck.length-1)
+                // alert(productsIds)
+                // alert(productsIdnot)
+                location.href="${basepath}client/clientOrderServlet?action=createOrderBach&productIds="+productsIds+"&productsIdNotCheck="+productsIdnot;
+            }
+
+        })
+
+    })
+</script>
+
 </body>
 <!--[if IE 6]>
 <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>

@@ -20,7 +20,7 @@
   </script>
 </head>
 <body>
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@ include file="/common/backend/searchBar.jsp" %>
 <!--End Header End-->
 <div class="i_bg bg_color">
@@ -43,7 +43,7 @@
           <tr>
             <td>${temp.name}</td>
             <td>
-              <a href="" target="_blank">
+              <a href="client/clientServlet?action=findProductDetail&id=${temp.id}" target="_blank">
                   <img src="files/${temp.fileName}" width="50" height="50"/>
               </a>
             </td>

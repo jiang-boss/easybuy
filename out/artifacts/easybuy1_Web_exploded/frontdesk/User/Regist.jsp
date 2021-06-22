@@ -14,99 +14,254 @@
     <script type="text/javascript" src="static/js/fban.js"></script>
     <script type="text/javascript" src="static/js/f_ban.js"></script>
     <script type="text/javascript" src="static/js/mban.js"></script>
-    <script type="text/javascript" src="static/js/bban.js"></script>
-    <script type="text/javascript" src="static/js/hban.js"></script>
-    <script type="text/javascript" src="static/js/tban.js"></script>
+<%--    <script type="text/javascript" src="static/js/bban.js"></script>--%>
+<%--    <script type="text/javascript" src="static/js/hban.js"></script>--%>
+<%--    <script type="text/javascript" src="static/js/tban.js"></script>--%>
 	<script type="text/javascript" src="static/js/lrscroll_1.js"></script>
 <title>尤洪</title>
     <script type="text/javascript">
         $(function (){
-            $(".l_user").blur(function (){
-                // var username=this.value;
-                // var usernamepat=/^\w{5,12}$/;
-                // if (!usernamepat.test(username)){
-                //     $("#errormsg").text("用户名不合法")
-                //     return false;
-                // }
-                $.getJSON("http://localhost:8080/yimaiwang/userservlet","action=ajaxExitUsername&username="+username,function (data){
-                    if(data.exitname==true){
-                        $("#errormsg").text("用户名已存在！")
-                        return false;
-                    }
-                    else {$("#errormsg").text("")
-                    }
-                })
+            $("#loginName").blur(function (){
+                $("#errormsg").text("")
+                $("#loginName").css("border","")
+                var usernamepat=/^\w{5,12}$/;
+                var loginName=this.value;
+                if (loginName==""){
+                    $("#errormsg").text("用户名不能为空！")
+                    return false;
+                }else if (!usernamepat.test(loginName)){
+                    $("#errormsg").text("用户名不合法必须是5到十二位的长度")
+                    return false;
+                }else {
+                    $.getJSON("http://localhost:8080/yimaiwang/userservlet","action=ajaxExitUsername&username="+loginName,function (data){
+                        if(data.exitname==true){
+                            $("#errormsg").text("用户名已经存在！")
+                            return false;
+                        }
+                        else {
+                            $("#errormsg").text("")
+                            alert("dsds")
+                            $("#loginName").css("border","solid green 1px")
+                        }
+                    })
+                }
+
             })
             $("#code_img").click(function (){
                 this.src="${basePath}kaptchaServlet?d="+new Date();
             })
-            $(".l_pwd").blur(function (){
-                var password=$(".l_pwd").val();
-                var passwordpat=/^\w{5,12}$/;
+
+
+            $("#pwd1").blur(function (){
+                var passwordpat=/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,20}$/
+                var password=$("#pwd1").val();
+                if(password==""){
+                    $("#userpwd").text("密码不能为空！")
+                    return false;
+                }else
                 if (!passwordpat.test(password)){
-                    // alert("密码应该大于五个长度小于12个长度")
-                    $("#userpwd").text("密码格式不正确！")
+                    $("#userpwd").text("密码包含 数字,英文,字符中的两种以上，长度6-20")
                     return false;
                 }
                 $("#userpwd").text("")
+                $("#pwd1").css("border","solid green 1px")
             })
+
             $("#pwd2").blur(function (){
-                var password=$(".l_pwd").val();
-                var repassword=$("#pwd2").val();
-                // if (repassword==""){
-                //     $("#userped2").text("两次输入的密码不正确1")
-                //     return false;
-                // }
-                if (repassword!=password){
-                    // alert("两次密码不正确 请重新输入");
-                    $("#userped2").text("两次输入的密码不正确")
+                var password=$("#pwd1").val();
+                var password2=$("#pwd2").val();
+
+                if (password2==""){
+                    $("#userped2").text("请输入确认密码")
+                    return false;
+                }
+                if (password!=password2){
+                    $("#userped2").text("两次密码不一致")
                     return false;
                 }
                 $("#userped2").text("")
+                $("#pwd2").css("border","solid green 1px")
+            })
+
+            $("#trueName").blur(function (){
+
+                var truereg=/^[\u4E00-\u9FA5]{2,10}(·[\u4E00-\u9FA5]{2,10}){0,2}$/
+                var username=$("#trueName").val();
+                if(username==""){
+                    $("#username").text("不能为空")
+                    return false;
+                }else if (!truereg.test(username)){
+                    $("#username").text("请输入真实的姓名")
+                    return  false
+                }
+                $("#username").text("")
+                $("#trueName").css("border","solid green 1px")
+
+            })
+            $("#shenfenzhen").blur(function (){
+                var identyCodereg=/^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+                var identyCode=$("#shenfenzhen").val();
+                if (identyCode==""){
+                    $("#identity").text("不能为空！")
+                    return false;
+
+                }else if(!identyCodereg.test(identyCode)){
+                    $("#identity").text("身份证的格式错误！")
+                    return false
+                }
+                $("#identity").text("")
+                $("#shenfenzhen").css("border","solid green 1px")
             })
             $(".l_email").blur(function (){
-                var email=$(".l_email").val();
-                var eamiltest=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-                if(!eamiltest.test(email)){
-                    // alert("邮箱不符合要求")
-                    $("#email").text("邮箱的格式不正确")
-                    return false;
+                var EmailCodereg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                var eamilCode=$("#youxiang").val();
+                if (eamilCode==""){
+                    $("#email").text("邮箱不能为空")
+                    return false
+                }else if(!EmailCodereg.test(eamilCode)){
+                    $("#email").text("请输入真确的邮箱格式！")
+                    return false
                 }
                 $("#email").text("")
+                $(".l_email").css("border","solid green 1px")
             })
             $(".l_tel").blur(function (){
-                //判断电话格式
-                var tel=$(".l_tel").val();
-                var telTest=/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/;
-                if(!telTest.test(tel)){
-                    // alert("请输入正确的电话号码")
-                    $("#telephone").text("输入正确的电话号码")
-                    return false;
+                var phoneCodereg=/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
+                var phoneCode=$("#shouji").val();
+                if (phoneCode==""){
+                    $("#telephone").text("号码不能为空！")
+                    return false
+                }else if (!phoneCodereg.test(phoneCode)){
+                    $("#telephone").text("请输入真确的电话号码格式！")
+                    return false
                 }
                 $("#telephone").text("")
+                $(".l_tel").css("border","solid green 1px")
             })
+
             //给注册按钮绑定提交事件
             $(".log_btn").click(function (){
-                var password=$("#pwd1");
-                var md5pass=$.md5(password);
-                $("#pwd1").val(md5pass);
-                //判断验证码
-                var code=$(".l_ipt").val();
-                var code=$.trim(code);
-                if(code==""||code==null){
-                    $("#codeerr").text("验证码不能为空")
-                    return  false;
+                return checkloginName()&&checkpwd()&&checkrepwd()&&checkuserName()&&checkindentyCode()&&checkEmailCode()&&checkphoneCode()&&checkyanzhenCode()&&checkchose();
+
+            })
+            /*(**************************************************/
+            //登录名的验证
+            function checkloginName(){
+                var usernamepat=/^\w{5,12}$/;
+                var loginName=$("#loginName").val()
+                alert(loginName)
+                if (loginName==""){
+                    $("#errormsg").text("用户名不能为空！")
+                    return false;
+                }else if (!usernamepat.test(loginName)){
+                    $("#errormsg").text("用户名不合法必须是5到十二位的长度")
+                    return false;
+                }
+                $("#errormsg").text("")
+                return true;
+            }
+            function checkpwd(){
+                var passwordpat=/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,20}$/
+                var password=$("#pwd1").val();
+                if(password==""){
+                    $("#userpwd").text("密码不能为空！")
+                    return false;
+                }else
+                if (!passwordpat.test(password)){
+                    $("#userpwd").text("密码包含 数字,英文,字符中的两种以上，长度6-20")
+                    return false;
+                }
+                $("#userpwd").text("")
+                return true;
+            }
+            function checkrepwd(){
+                var password=$("#pwd1").val();
+                var password2=$("#pwd2").val();
+                alert(password2)
+                if (password2==""){
+                    $("#userped2").text("请输入确认密码")
+                    return false;
+                }
+                if (password!=password2){
+                    $("#userped2").text("两次密码不一致")
+                    return false;
+                }
+                $("#userped2").text("")
+                return true;
+            }
+            function checkuserName(){
+                var truereg=/^[\u4E00-\u9FA5]{2,10}(·[\u4E00-\u9FA5]{2,10}){0,2}$/
+                var username=$("#trueName").val();
+                if(username==""){
+                    $("#username").text("不能为空")
+                    return false;
+                }else if (!truereg.test(username)){
+                    $("#username").text("请输入真实的姓名")
+                    return  false
+                }
+                $("#username").text("")
+                return true;
+            }
+            function checkindentyCode(){
+                var identyCodereg=/^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+                var identyCode=$("#shenfenzhen").val();
+                alert(identyCode)
+                if (identyCode==""){
+                    $("#identity").text("不能为空！")
+                    return false;
+
+                }else if(!identyCodereg.test(identyCode)){
+                    $("#identity").text("身份证的格式错误！")
+                    return false
+                }
+                $("#identity").text("")
+                return true;
+            }
+            function checkEmailCode(){
+                var EmailCodereg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                var eamilCode=$("#youxiang").val();
+                alert(eamilCode)
+                if (eamilCode==""){
+                    $("#email").text("邮箱不能为空")
+                    return false
+                }else if(!EmailCodereg.test(eamilCode)){
+                    $("#email").text("请输入真确的邮箱格式！")
+                    return false
+                }
+                $("#email").text("")
+                return true;
+            }
+            function checkphoneCode(){
+                var phoneCodereg=/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
+                var phoneCode=$("#shouji").val();
+                if (phoneCode==""){
+                    $("#telephone").text("号码不能为空！")
+                    return false
+                }else if (!phoneCodereg.test(phoneCode)){
+                    $("#telephone").text("请输入真确的电话号码格式！")
+                    return false
+                }
+                $("#telephone").text("")
+                return true;
+            }
+            function checkyanzhenCode(){
+                var yanzhenCode=$("#yanzhen").val();
+                if (yanzhenCode==""){
+                    $("#codeerr").val("验证ma不能为空！")
+                    return false
                 }
                 $("#codeerr").text("")
-
-                //判断是否勾选已读用户协议
+                return true;
+            }
+            function checkchose(){
                 var istrue=$("#check").is(":checked")
                 if(!istrue==true){
                     $("#checkerr").text("请勾选用户协议")
                     return  false
                 }
                 $("#checkerr").text("")
-            })
+                return true;
+            }
         })
     </script>
 </head>
@@ -144,7 +299,7 @@
               </tr>
                 <tr height="50">
                 <td align="right"><font color="#ff4e00">*</font>登录用户名 &nbsp;</td>
-                <td><input type="text" value="" name="loginName" class="l_user" id="user"/><br/><span style="color: red" id="errormsg"></span></td>
+                <td><input style="" type="text" value="${requestScope.loginName}" name="loginName" class="l_user" id="loginName"/><br/><span style="color: red" id="errormsg"></span></td>
 
                </tr>
                 <tr height="50">
@@ -157,7 +312,7 @@
                 </tr>
                 <tr height="50">
                     <td align="right"><font color="#ff4e00">*</font>&nbsp;真实姓名 &nbsp;</td>
-                    <td><input type="text" value="" name="userName" class="l_user"/><br/><span style="color: red" id="username"></span></td>
+                    <td><input type="text" value="${requestScope.user}" name="userName" id="trueName" class="l_user"/><br/><span style="color: red" id="username"></span></td>
                 </tr>
                 <tr height="50">
                     <td align="right"><font color="#ff4e00">*</font>&nbsp;性别 &nbsp;</td>
@@ -168,22 +323,22 @@
                 </tr>
                 <tr height="50">
                     <td align="right">&nbsp;身份证号 &nbsp;</td>
-                    <td><input type="text" value="" name="identityCode" class="l_user"/><br/><span style="color: red"  id="identity"></span></td>
+                    <td><input type="text" value="" name="identityCode" class="l_user" id="shenfenzhen" /><br/><span style="color: red"  id="identity"></span></td>
                 </tr>
                 <tr height="50">
                     <td align="right">&nbsp;邮箱 &nbsp;</td>
-                    <td><input type="text" value="" name="email" class="l_email"/><br/><span style="color: red"  id="email"></span></td>
+                    <td><input type="text" value="${requestScope.email}" name="email" id="youxiang" class="l_email"/><br/><span style="color: red"  id="email"></span></td>
                 </tr>
                 <tr height="50">
                     <td align="right">&nbsp;手机 &nbsp;</td>
-                    <td><input type="text" value="" name="mobile" class="l_tel"/><br/><span style="color: red"  id="telephone"></span></td>
+                    <td><input type="text" value="${requestScope.tel}" name="mobile" class="l_tel" id="shouji"/><br/><span style="color: red"  id="telephone"></span></td>
                 </tr>
               <tr height="50">
                 <td align="right"> <font color="#ff4e00">*</font>&nbsp;验证码 &nbsp;</td>
                 <td>
-                    <input type="text" value="" name="code" class="l_ipt" />
+                    <input type="text" value="" name="code" class="l_ipt" id="yanzhen" />
 <%--                    <a href="#" style="font-size:12px; font-family:'宋体';">换一张</a>--%>
-                    <img id="code_img" alt="" src="kaptchaServlet" style="float: right; margin-right: 50px;width: 110px;height: 40px"><br/><span id="codeerr"></span>
+                    <img id="code_img"  alt="" src="kaptchaServlet" style="float: right; margin-right: 50px;width: 110px;height: 40px"><br/><span style="color: red" id="codeerr">${requestScope.msg}</span>
                 </td>
               </tr>
               <tr>

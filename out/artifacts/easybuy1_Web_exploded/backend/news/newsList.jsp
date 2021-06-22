@@ -13,7 +13,7 @@
 <%--    <link type="text/css" rel="stylesheet" href="${ctx}/statics/css/style.css" />--%>
 </head>
 <body>
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@ include file="/common/backend/searchBar.jsp" %>
 <div class="i_bg bg_color">
     <!--Begin 用户中心 Begin -->

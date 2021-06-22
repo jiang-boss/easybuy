@@ -4,6 +4,7 @@
 <head>
     <%--   静态引入base标签--%>
     <%@include file="/common/front/baseAndjs.jsp" %>
+<%--        <link rel="stylesheet" href="static/bootstrap-3.4.1-dist/css/bootstrap.min.css"/>--%>
         <script type="text/javascript" src="static/js/jquery-1.11.1.min_044d0927.js"></script>
         <script type="text/javascript" src="static/js/jquery.bxslider_e88acd1b.js"></script>
         <script type="text/javascript" src="static/js/jquery-1.8.2.min.js"></script>
@@ -11,12 +12,18 @@
 <%--        <script type="text/javascript" src="static/js/shade.js"></script>--%>
     <script type="text/javascript" src="static/js/lrscroll_1.js"></script>
     <script type="text/javascript" src="static/js/n_nav.js"></script>
-    <title>尤洪</title>
+<%--        <script type="text/javascript" src="static/jquery-3.6.0.js"></script>--%>
+<%--        <script type="text/javascript" src="static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>--%>
+
+        <title>尤洪</title>
     <script type="text/javascript">
         $(function (){
             $(".j_car").click(function (){
                 <%--alert("${pageScope.basepath}")--%>
-                alert("添加成功！")
+                // $("#addSuccess").modal({
+                //     backdrop:'static'
+                // })
+                alert("添加商品成功！")
                 //这里发送请求给服
                 var id=$(this).attr("cartItemid")
                 $.getJSON("${pageScope.basepath}client/cartServlet","action=addProductAjax&id="+id,function (data){
@@ -41,7 +48,7 @@
 </head>
 <body>
 <!--Begin Header Begin-->
-<%@include file="/common/front/header.jsp" %>
+<%@include file="/common/backend/header.jsp" %>
 <%@include file="/common/front/searchBar.jsp" %>
 <!--End Header End-->
 <!--Begin Menu Begin-->
@@ -49,44 +56,6 @@
 <!--End Menu End-->
 
 <div class="i_bg">
-<%--    <div class="postion">--%>
-<%--        <span class="fl">全部 > 美妆个护 > 香水 > </span>--%>
-<%--        <span class="n_ch">--%>
-<%--            <span class="fl">品牌：<font>香奈儿</font></span>--%>
-<%--            <a href="#"><img src="static/images/s_close.gif"/></a>--%>
-<%--        </span>--%>
-<%--    </div>--%>
-<%--    <!--Begin 筛选条件 Begin-->--%>
-<%--    <div class="content mar_10">--%>
-<%--        <table border="0" class="choice" style="width:100%; font-family:'宋体'; margin:0 auto;" cellspacing="0"--%>
-<%--               cellpadding="0">--%>
-<%--            <tr valign="top">--%>
-<%--                <td width="70">&nbsp; 品牌：</td>--%>
-<%--                <td class="td_a"><a href="#" class="now">香奈儿（Chanel）</a><a href="#">迪奥（Dior）</a>--%>
-<%--                    <a href="#">范思哲（VERSACE）</a><a href="#">菲拉格慕（Ferragamo）</a><a href="#">兰蔻（LANCOME）</a>--%>
-<%--                    <a href="#">爱马仕（HERMES）</a><a href="#">卡文克莱（Calvin Klein）</a><a href="#">古驰（GUCCI）</a>--%>
-<%--                    <a href="#">宝格丽（BVLGARI）</a><a href="#">阿迪达斯（Adidas）</a><a href="#">卡尔文·克莱恩（CK）</a>--%>
-<%--                    <a href="#">凌仕（LYNX）</a><a href="#">大卫杜夫（Davidoff）</a><a href="#">安娜苏（Anna sui）</a><a href="#">阿玛尼（ARMANI）</a>--%>
-<%--                    <a href="#">娇兰（Guerlain）</a></td>--%>
-<%--            </tr>--%>
-<%--            <tr valign="top">--%>
-<%--                <td>&nbsp; 价格：</td>--%>
-<%--                <td class="td_a"><a href="#">0-199</a><a href="#" class="now">200-399</a><a href="#">400-599</a><a--%>
-<%--                        href="#">600-899</a><a href="#">900-1299</a><a href="#">1300-1399</a><a href="#">1400以上</a></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>&nbsp; 类型：</td>--%>
-<%--                <td class="td_a"><a href="#">女士香水</a><a href="#">男士香水</a><a href="#">Q版香水</a><a href="#">组合套装</a><a--%>
-<%--                        href="#">香体走珠</a><a href="#">其它</a></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>&nbsp; 香型：</td>--%>
-<%--                <td class="td_a"><a href="#">浓香水</a><a href="#">香精Parfum香水</a><a href="#">淡香精EDP淡香水</a><a--%>
-<%--                        href="#">香露EDT</a><a href="#">古龙水</a><a href="#">其它</a></td>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
-<%--    </div>--%>
-<%--    <!--End 筛选条件 End-->--%>
 
     <div class="content mar_20">
         <div class="l_history">
@@ -154,7 +123,13 @@
     <%@include file="/common/front/footer.jsp" %>
     <!--End Footer End -->
 </div>
-
+<div class="modal fade" id="addSuccess" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            添加商品成功
+        </div>
+    </div>
+</div>
 </body>
 
 <!--[if IE 6]>

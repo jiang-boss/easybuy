@@ -15,7 +15,7 @@
 </head>
 <body>  
 <!--Begin Header Begin-->
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@include file="/common/front/searchBar.jsp"%>
 <!--End Header End--> 
 <div class="i_bg bg_color">
@@ -29,7 +29,7 @@
                   <tr valign="top">
                     <td width="115"><img src="static/images/user.jpg" width="90" height="90" /></td>
                     <td>
-                    	<div class="m_user">TRACY</div>
+                    	<div class="m_user">${sessionScope.login.loginName}</div>
                         <p>
                             等级：注册用户 <br />
                             <font color="#ff4e00">您还差 270 积分达到 分红100</font><br />

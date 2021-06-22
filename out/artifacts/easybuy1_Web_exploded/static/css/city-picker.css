@@ -14,7 +14,7 @@
     background-color: #fff;
     color: #ccc;
     cursor: pointer;
-    width: 600px;
+    /*width: 600px;*/
     height: 34px;
 }
 
@@ -53,7 +53,7 @@
 
 .city-picker-dropdown {
     position: absolute;
-    width: 315px;!important;
+    width: 315px;
     left: -9999px;
     top: -9999px;
     outline: 0;

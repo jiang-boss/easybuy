@@ -18,6 +18,8 @@
 %>
 <base href=<%=basePath%>>
 <%--<meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8;IE=edge" />--%>
+<%--<link rel="stylesheet" href="static/css/city-picker.css"/>--%>
+
 <link type="text/css" rel="stylesheet" href="static/css/style.css" />
 
 

@@ -133,7 +133,7 @@ public class userServlet extends BaseServlet{
      * @throws IOException
      */
     protected void ajaxExitUsername(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         System.out.println("请求过来了");
+         System.out.println("请求过来了表单验证");
          String username = req.getParameter("username");
             boolean b=((username == "")||userService.exitUsername(username));
             Map<String,Object> resMap=new HashMap<>();

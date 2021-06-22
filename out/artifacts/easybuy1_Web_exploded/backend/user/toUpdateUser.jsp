@@ -102,7 +102,7 @@
 </head>
 
 <body>
-<%@include file="/common/front/header.jsp" %>
+<%@include file="/common/backend/header.jsp" %>
 <%@ include file="/common/backend/searchBar.jsp" %>
 
 <!--End Header End-->

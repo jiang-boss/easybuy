@@ -13,7 +13,7 @@
 </head>
 <body>
 <!--Begin Header Begin-->
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@include file="/common/front/searchBar.jsp"%>
 <!--End Header End-->
 <div class="i_bg bg_color">
@@ -31,58 +31,18 @@
                     <td width="20%">订单号</td>
                     <td width="25%">下单时间</td>
                     <td width="15%">订单总金额</td>
-                    <td width="25%">订单状态</td>
+                    <td width="25%">收货地址</td>
                     <td width="15%">操作</td>
                 </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>未确认，未付款，未发货</td>
-                    <td>取消订单</td>
-                </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>已确认，已付款，已发货</td>
-                    <td><font color="#ff4e00">已确认</font></td>
-                </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>未确认，未付款，未发货</td>
-                    <td>取消订单</td>
-                </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>已确认，已付款，已发货</td>
-                    <td><font color="#ff4e00">已确认</font></td>
-                </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>未确认，未付款，未发货</td>
-                    <td>取消订单</td>
-                </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>已确认，已付款，已发货</td>
-                    <td><font color="#ff4e00">已确认</font></td>
-                </tr>
-                <tr>
-                    <td><font color="#ff4e00">2015092823056</font></td>
-                    <td>2015-09-26 16:45:20</td>
-                    <td>￥456.00</td>
-                    <td>未确认，未付款，未发货</td>
-                    <td>取消订单</td>
-                </tr>
+                <c:forEach items="${requestScope.orderList}" var="order_item">
+                    <tr>
+                        <td><font color="#ff4e00">${order_item.serialNumber}</font></td>
+                        <td>${order_item.createTime}</td>
+                        <td>${order_item.cost}</td>
+                        <td>${order_item.userAddress}</td>
+                        <td>取消订单</td>
+                    </tr>
+                </c:forEach>
             </table>
 
 

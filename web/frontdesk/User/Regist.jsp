@@ -21,8 +21,9 @@
 <title>尤洪</title>
     <script type="text/javascript">
         $(function (){
-            $(".l_user").blur(function (){
+            $("#loginName").blur(function (){
                 $("#errormsg").text("")
+                $("#loginName").css("border","")
                 var usernamepat=/^\w{5,12}$/;
                 var loginName=this.value;
                 if (loginName==""){
@@ -32,13 +33,13 @@
                     $("#errormsg").text("用户名不合法必须是5到十二位的长度")
                     return false;
                 }else {
-                    $.getJSON("http://localhost:8080/yimaiwang/userservlet","action=ajaxExitUsername&username="+username,function (data){
+                    $.getJSON("http://localhost:8080/yimaiwang/userservlet","action=ajaxExitUsername&username="+loginName,function (data){
                         if(data.exitname==true){
                             $("#errormsg").text("用户名已经存在！")
                             return false;
                         }
-                        else {$("#errormsg").text("")
-                            alert("dsds")
+                        else {
+                            $("#errormsg").text("")
                             $("#loginName").css("border","solid green 1px")
                         }
                     })
