@@ -1,11 +1,9 @@
 package com.jiang.dao.Impl;
 
 import com.jiang.dao.UserDao;
-import com.jiang.pojo.News;
 import com.jiang.pojo.User;
 import com.jiang.pojo.pre.Address;
 
-import javax.print.attribute.standard.NumberUp;
 import java.util.List;
 
 /**

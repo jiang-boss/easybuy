@@ -60,6 +60,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         String sql ="select `id`,`userId`,`loginName`,`userAddress`,`createTime`,`cost`,`serialNumber` from easybuy_order limit ?,?";
        return qureyForList(Order.class, sql, begin, pageSize);
     }
+
     @Override
     public List<OrderList> findOrders() {
         String sql="SELECT eo.id,ep.name,ep.fileName,ed.quantity,ed.cost from easybuy_order eo,easybuy_order_detail ed,easybuy_product ep " +
@@ -76,5 +77,11 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     public Order findOrdersByOrderNumber(String orderser) {
         String sql="select `id`,`userId`,`loginName`,`userAddress`,`createTime`,`cost`,`serialNumber` from easybuy_order where `serialNumber`=? ";
          return  queryForOne(Order.class,sql,orderser);
+    }
+
+    @Override
+    public List<Order> finOrdersById(int userId) {
+      String sql="select `id`,`userId`,`loginName`,`userAddress`,`createTime`,`cost`,`serialNumber` from easybuy_order where userId=?";
+     return qureyForList(Order.class,sql,userId);
     }
 }

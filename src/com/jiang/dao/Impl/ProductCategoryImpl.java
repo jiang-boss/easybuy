@@ -95,7 +95,7 @@ public class ProductCategoryImpl extends BaseDao implements ProductCategoryDao {
         return qureyForList(ProduceCategory.class, sql,i);
     }
     /**
-     * 传入父类的id和子类的 分类的等级查出子分类的全部集合
+     * 传入父类的id和子类的分类的等级查出子分类的全部集合
      * @param categoryid 父类的id
      * @param id 分类级别
      * @return

@@ -1,7 +1,5 @@
 package com.jiang.dao;
 
-import com.jiang.dao.Impl.BaseDao;
-import com.jiang.pojo.News;
 import com.jiang.pojo.User;
 import com.jiang.pojo.pre.Address;
 

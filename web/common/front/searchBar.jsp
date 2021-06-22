@@ -9,7 +9,7 @@
 <div class="top">
     <div class="logo"><a href="index.jsp"><img src="static/images/logo.png" /></a></div>
     <div class="search">
-        <form>
+        <form action="client/clientServlet">
             <input type="text" value="" class="s_ipt" />
             <input type="submit" value="搜索" class="s_btn" />
         </form>

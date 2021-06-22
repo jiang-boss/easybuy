@@ -12,7 +12,7 @@ import java.util.List;
 public class ThreeCategoryDaoImpl extends BaseDao implements ThreeCategoryDao {
     @Override
     public ThreeCategory queryForThreeCategory(Integer id) {
-        String sql="SELECT ec1.name as cateOne,ec2.name as cateTwo,ec3.name as cateThree from easybuy_product_category as ec1,easybuy_product_category as ec2,easybuy_product_category as ec3,easybuy_product ep WHERE ep.categoryLevel1Id=ec1.id AND " +
+        String sql="SELECT ep.categoryLevel1Id as oneId,ep.categoryLevel2Id as twoId,ep.categoryLevel3Id as threeId,ec1.name as cateOne,ec2.name as cateTwo,ec3.name as cateThree from easybuy_product_category as ec1,easybuy_product_category as ec2,easybuy_product_category as ec3,easybuy_product as ep WHERE ep.categoryLevel1Id=ec1.id AND " +
                 "ep.categoryLevel2Id=ec2.id and ep.categoryLevel3Id=ec3.id and ep.id=?";
         return queryForOne(ThreeCategory.class,sql,id);
     }

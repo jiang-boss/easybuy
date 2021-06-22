@@ -82,7 +82,6 @@
                     }
                 })
             })
-
             //给提交按钮绑定事件
             $("#subbtn").click(function (){
                if( ($("#changecate").val())==0){
@@ -94,7 +93,7 @@
     </script>
 </head>
 <body>
-<%@include file="/common/front/header.jsp" %>
+<%@include file="/common/backend/header.jsp" %>
 <%@ include file="/common/backend/searchBar.jsp" %>
 <!--End Header End-->
 <div class="i_bg bg_color">

@@ -14,15 +14,15 @@
     <script type="text/javascript" src="static/js/fban.js"></script>
     <script type="text/javascript" src="static/js/f_ban.js"></script>
     <script type="text/javascript" src="static/js/mban.js"></script>
-    <script type="text/javascript" src="static/js/bban.js"></script>
-    <script type="text/javascript" src="static/js/hban.js"></script>
-    <script type="text/javascript" src="static/js/tban.js"></script>
+<%--    <script type="text/javascript" src="static/js/bban.js"></script>--%>
+<%--    <script type="text/javascript" src="static/js/hban.js"></script>--%>
+<%--    <script type="text/javascript" src="static/js/tban.js"></script>--%>
 	<script type="text/javascript" src="static/js/lrscroll_1.js"></script>
 <title>尤洪</title>
     <script type="text/javascript">
         $(function (){
             $(".l_user").blur(function (){
-                // var username=this.value;
+                var username=this.value;
                 // var usernamepat=/^\w{5,12}$/;
                 // if (!usernamepat.test(username)){
                 //     $("#errormsg").text("用户名不合法")
@@ -30,7 +30,7 @@
                 // }
                 $.getJSON("http://localhost:8080/yimaiwang/userservlet","action=ajaxExitUsername&username="+username,function (data){
                     if(data.exitname==true){
-                        $("#errormsg").text("用户名已存在！")
+                        $("#errormsg").text("用户名不可用！")
                         return false;
                     }
                     else {$("#errormsg").text("")

@@ -11,12 +11,17 @@ import java.util.List;
  */
 public interface OrderDao {
     public int savaOrder(Order order);
+
     List<Order> getOrderList();
 
     Integer getOrderCount();
 
     List<Order> getOrderPageList(int begin, int pageSize);
+
+
     List<OrderList> findOrders();
     //通过订单号找到该订单的主键
     Order findOrdersByOrderNumber(String orderser);
+
+    List<Order> finOrdersById(int userId);
 }

@@ -6,9 +6,7 @@
     <%@include file="/common/front/baseAndjs.jsp"%>
         <link rel="stylesheet" href="static/bootstrap-3.4.1-dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="static/css/city-picker.css"/>
-
         <script type="text/javascript" src="static/jquery-3.6.0.js"></script>
-
     <%--        <script type="text/javascript" src="static/js/jquery-1.11.1.min_044d0927.js"></script>--%>
 <%--        <script type="text/javascript" src="static/js/jquery.bxslider_e88acd1b.js"></script>--%>
 <%--        <script type="text/javascript" src="static/js/jquery-1.8.2.min.js"></script>--%>
@@ -21,12 +19,19 @@
         <script type="text/javascript" src="static/cityjs/city-picker.data.js"></script>
         <script type="text/javascript" src="static/cityjs/city-picker.js"></script>
         <script type="text/javascript" src="static/cityjs/main.js"></script>
-
+        <style type="text/css">
+            .city-picker-span{
+                /*width: 100%;!important;*/
+            }
+            .city-picker-dropdown {
+                width: 100%;
+            }
+        </style>
 <title>尤洪</title>
 </head>
-<body>
+<body style="font-size: 12px">
 <!--Begin Header Begin-->
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@include file="/common/front/searchBar.jsp"%>
 <!--End Header End-->
 
@@ -52,7 +57,8 @@
                 <td class="car_th" width="130">小计</td>
                 <td class="car_th" width="140">返还积分</td>
               </tr>
-                <c:forEach items="${sessionScope.cart.cartItemMap}" var="Item">
+<%--                <c:forEach items="${sessionScope.cart.cartItemMap}" var="Item">--%>
+                    <c:forEach items="${sessionScope.proChecks}" var="Item">
                     <tr class="car_tr">
                         <td style="text-align: center">
                             <div  class="c_s_img"><img src="files/${Item.value.fileName}" width="73" height="73" /></div>
@@ -66,7 +72,7 @@
                 </c:forEach>
               <tr>
                 <td colspan="5" align="right" style="font-family:'Microsoft YaHei';">
-                    商品总价${sessionScope.cart.totalPrice}； 返还积分 ${sessionScope.cart.count*26}R
+                    商品总价${sessionScope.totalPriceCheck}； 返还积分 ${sessionScope.totalCountCheck*26}R
                 </td>
               </tr>
             </table>
@@ -82,83 +88,83 @@
                         </button>
                     </div>
                         <%--修改的模态框--%>
-                        <div class="modal fade " id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal fade " id="updateModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">修改收货地址</h4>
                                     </div>
-
                                     <div class="modal-body">
                                         <div class="container-fluid">
                                             <%--                         这里是地址的表单--%>
                                             <div class="row">
-                                                <form class="form-horizontal">
+                                                <form class="form-horizontal" action="client/addressServlet" method="get">
+                                                    <input type="hidden" name="action" value="updateAddressForm"/>
+                                                    <input type="hidden" id="hideAddress" name="region" />
+                                                    <input type="hidden" name="userId" value="${sessionScope.login.id}"/>
+                                                    <input id="isdefau" type="hidden" name="isDefault"/>
+                                                    <input id="AddressIdHide" type="hidden" name="id" value=""/>
                                                     <br/>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">所在区域</label>
                                                         <div class="col-md-8" >
-                                                            <input type="text" id="city3" class="form-control" data-toggle="city-picker" />
+                                                            <input type="text" style="width:366.66px ;height: 34px" id="city3" class="form-control" data-toggle="city-picker" />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-2 control-label">详细地址</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control" id="inputAddress" placeholder="请输入详细的地址信息，如道路，门牌号，小区，楼栋，单元等信息">
+                                                            <input type="text" name="address"  class="form-control" id="inputAddress" placeholder="请输入详细的地址信息，如道路，门牌号，小区，楼栋，单元等信息">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">邮政编号</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control" id="inputCode" placeholder="请填写邮编">
+                                                            <input type="text" name="code" class="form-control" id="inputCode" placeholder="请填写邮编">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">收货人姓名</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control" id="inputName" placeholder="长度不超过25个字符">
+                                                            <input type="text" name="rename" class="form-control" id="inputName" placeholder="长度不超过25个字符">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">手机号码</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="col-lg-7 form-control" id="inputtel" placeholder="手机号必须填写">
+                                                            <input type="text" name="phone" class="col-lg-7 form-control" id="inputtel" placeholder="手机号必须填写">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-md-2  col-sm-offset-9">
-                                                            <button type="submit" id="update_sub_address" class="btn btn-primary ">确认修改</button>
+                                                            <input type="submit" id="update_sub_address_pre"  class="btn btn-primary " value="保存">
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-
                             </div>
                         </div>
                 </div>
             </div>
-
-
             <br/>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-hover " id="chooseAddress">
+                        <table class="table table-hover table-bordered" id="chooseAddress">
                             <c:forEach items="${sessionScope.addressList}" var="address">
                                 <c:if test="${address.isDefault == '1'}">
                                     <tr>
                                         <th  class="col-md-2"><span  class="glyphicon glyphicon-map-marker"  aria-hidden="true"/>送货至</th>
-                                        <th><input addressid="${address.id}" class="radioss" name="radio" type="radio" checked />&nbsp;&nbsp;<span>${address.region}${address.address}</span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span></th>
-                                        <th><a>默认地址</a></th>
+                                        <th><input addressid="${address.id}" class="radioss" name="radio" type="radio" checked />&nbsp;&nbsp;<span>${address.region}&nbsp;&nbsp;&nbsp; ${address.address} </span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span> <span class="input-sm bg-warning col-md-offset-2">默认地址</span></th>
                                     </tr>
                                 </c:if>
                                 <c:if test="${address.isDefault !='1'}">
                                     <tr>
                                         <th  class="col-md-2"><span  class="glyphicon glyphicon-map-marker hide "  aria-hidden="true"/>送货至</th>
-                                        <th><input  addressid="${address.id}" class="radioss" name="radio" type="radio" />&nbsp;&nbsp;<span> ${address.region}${address.address}</span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span></th>
+                                        <th><input  addressid="${address.id}" class="radioss" name="radio" type="radio"/>&nbsp;&nbsp;<span> ${address.region}&nbsp;&nbsp;&nbsp;       ${address.address}</span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span></th>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -183,56 +189,18 @@
             </div>
             <ul class="pay">
                 <li class="checked">支付宝<div class="ch_img"></div></li>
-<%--                <li>银行亏款/转账<div class="ch_img"></div></li>--%>
-<%--                <li>货到付款<div class="ch_img"></div></li>--%>
-<%--                <li>支付宝<div class="ch_img"></div></li>--%>
             </ul>
-
-            <div class="two_t">
-            	其他信息
-            </div>
-            <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="145" align="right" style="padding-right:0;"><b style="font-size:14px;">使用红包：</b></td>
-                  <td>
-                      <span class="fl" style="margin-left:50px; margin-right:10px;">选择已有红包</span>
-                      <select class="jj" name="city">
-                          <option value="0" selected="selected">请选择</option>
-                          <option value="1">50元</option>
-                          <option value="2">30元</option>
-                          <option value="3">20元</option>
-                          <option value="4">10元</option>
-                      </select>
-                      <span class="fl" style="margin-left:50px; margin-right:10px;">或者输入红包序列号</span>
-                      <span class="fl"><input type="text" value="" class="c_ipt" style="width:220px;"/>
-                    <span class="fr" style="margin-left:10px;"><input type="submit" value="验证红包" class="btn_tj"/></span>
-                    </span>
-                  </td>
-              </tr>
-              <tr valign="top">
-                <td align="right" style="padding-right:0;"><b style="font-size:14px;">订单附言：</b></td>
-                <td style="padding-left:0;"><textarea class="add_txt" style="width:860px; height:50px;"></textarea></td>
-              </tr>
-              <tr>
-              	<td align="right" style="padding-right:0;"><b style="font-size:14px;">缺货处理：</b></td>
-                <td>
-                	<label class="r_rad"><input type="checkbox" name="none" checked="checked" /></label><label class="r_txt" style="margin-right:50px;">等待所有商品备齐后再发</label>
-                    <label class="r_rad"><input type="checkbox" name="none" /></label><label class="r_txt" style="margin-right:50px;">取下订单</label>
-                    <label class="r_rad"><input type="checkbox" name="none" /></label><label class="r_txt" style="margin-right:50px;">与店主协商</label>
-                </td>
-              </tr>
-            </table>
             
             <table border="0" style="width:900px; margin-top:20px;" cellspacing="0" cellpadding="0">
               <tr>
                 <td align="right">
-                	该订单完成后，您将获得 <font color="#ff4e00">${sessionScope.cart.totalPrice}</font> 积分 ，以及价值 <font color="#ff4e00">￥0.00</font> 的红包 <br />
-                    商品总价: <font color="#ff4e00">￥${sessionScope.cart.totalPrice}</font>  + 配送费用: <font color="#ff4e00">￥15.00</font>
+                	该订单完成后，您将获得 <font color="#ff4e00">${sessionScope.totalPriceCheck}</font> 积分 ，以及价值 <font color="#ff4e00">￥0.00</font> 的红包 <br />
+                    商品总价: <font color="#ff4e00">￥${sessionScope.totalPriceCheck}</font>  + 配送费用: <font color="#ff4e00">￥15.00</font>
                 </td>
               </tr>
               <tr height="70">
                 <td align="right">
-                	<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥${sessionScope.cart.totalPrice+15}</span></b>
+                	<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥${sessionScope.totalPriceCheck+15}</span></b>
                 </td>
               </tr>
               <tr height="70">
@@ -248,22 +216,48 @@
     <!--End Footer End -->    
 </div>
 </body>
-
 <script type="text/javascript">
     $(function (){
+
         $("#creatOrder").click(function (){
             // var address=$("#userAddress").text()
             var  address=$(".radioss:checked").parent().find("span:first-of-type").text()
             // alert(address)
             location.href="${pageScope.basepath}client/clientOrderServlet?action=createOrder&address="+address;
         })
-
         $("#updateaddress").click(function (){
             // alert($(".radioss:checked").attr("addressid"))
-            //弹出模态框就将地址 填上去
-            $('#updateModal').modal({
-                backdrop:'static'
+            //弹出模态框就将地址 这里获取数据
+            var  id=$(".radioss:checked").attr("addressid")
+            $.ajax({
+                url:"client/addressServlet",
+                data:"action=updateAddress&id="+id,
+                type:"get",
+                dataType:"json",
+                success:function (resq){
+                    // alert(resq.address)
+                    // alert(resq.region)
+                    $("<span>").addClass("select-item").append(resq.region)
+                    // $(".title").text(resq.region)
+                    $("#inputCode").val(resq.code)
+                    $("#inputAddress").val(resq.address)
+                    $("#inputName").val(resq.rename)
+                    $("#inputtel").val(resq.phone)
+                    $("#AddressIdHide").val(resq.id)
+                    $("#isdefau").val(resq.isDefault)
+                }
             })
+            // $('#updateModal2').                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         modal({
+            //     backdrop:'static'
+            // })
+            $("#updateModal2").modal({
+                backdrop:"static"
+            })
+        })
+        $("#update_sub_address_pre").click(function (){
+            //将弹出的 信息添加至提交参数中
+            // alert($(".title").text())
+            $("#hideAddress").val($(".title").text())
         })
     })
 </script>

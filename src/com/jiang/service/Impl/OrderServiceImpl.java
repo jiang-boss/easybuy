@@ -62,9 +62,14 @@ public class OrderServiceImpl implements OrderService {
             order1= orderDao.findOrdersByOrderNumber(orderser);
            orderDetailDao.saveDetail(new OrderDetail(null,order1.getId(),cartItem.getId(),cartItem.getCount(),cartItem.getTotalPrice()));
         }
-        cart.clear();
          return order1;
     }
+
+    @Override
+    public List<Order> findOrdersByUserId(int userId) {
+       return orderDao.finOrdersById(userId);
+    }
+
     @Override
     public Page<Order> findPageOrder(int pageNum, int pageSize) {
         Page<Order> page=new Page<>();

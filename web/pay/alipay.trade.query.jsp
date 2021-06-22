@@ -27,7 +27,8 @@
 	String result = alipayClient.execute(alipayRequest).getBody();
 	
 	//输出
-	out.println(result);
+//	out.println(result);
+	request.getRequestDispatcher("/index.jsp").forward(request,response);
 %>
 <body>
 </body>

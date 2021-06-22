@@ -58,7 +58,6 @@ public class ClientServlet extends BaseServlet{
 //        req.getSession().setAttribute("newsList",listNews);
 //        req.getRequestDispatcher("/client/index.jsp").forward(req,resp);
 //    }
-
     /**
      *产品信息的回显
      * @param req
@@ -95,6 +94,19 @@ public class ClientServlet extends BaseServlet{
         req.setAttribute("id",id);
         req.getRequestDispatcher("/frontdesk/category/categoryList.jsp").forward(req,resp);
     }
+
+    /**
+     * 这里处理模糊搜索回显得数据
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
+    
     /**
      * 查找商品的详情 转到商品详情
      * @param req

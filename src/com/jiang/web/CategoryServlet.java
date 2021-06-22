@@ -79,7 +79,6 @@ public class CategoryServlet extends BaseServlet{
      */
     protected void getThreeCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
-
     /**
      * 得到一级分类
      * @param req

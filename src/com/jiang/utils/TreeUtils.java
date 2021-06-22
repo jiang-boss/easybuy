@@ -98,25 +98,25 @@ public class TreeUtils {
 
 
     public static void main(String[] args) {
-       TreeObject treeObject=new TreeObject(548,"化妆品",0);
+        TreeObject treeObject = new TreeObject(548, "化妆品", 0);
 //       treeObject.setId(548);
 //       treeObject.setName("化妆品");
 //       treeObject.setParentId(0);
-       TreeObject treeObject1=new TreeObject();
-       treeObject1.setId(654);
-       treeObject1.setParentId(548);
-       treeObject1.setName("面部护理");
-       TreeObject treeObject2=new TreeObject();
-       treeObject2.setName("少女派");
-       treeObject2.setId(655);
-       treeObject2.setParentId(654);
+        TreeObject treeObject1 = new TreeObject();
+        treeObject1.setId(654);
+        treeObject1.setParentId(548);
+        treeObject1.setName("面部护理");
+        TreeObject treeObject2 = new TreeObject();
+        treeObject2.setName("少女派");
+        treeObject2.setId(655);
+        treeObject2.setParentId(654);
 
-       List<TreeObject> list=new ArrayList<>();
-       list.add(treeObject);
-       List<TreeObject> list1=new ArrayList<>();
-       list1.add(treeObject1);
-       list1.add(treeObject2);
-       TreeUtils treeUtils=new TreeUtils(list,list1);
+        List<TreeObject> list = new ArrayList<>();
+        list.add(treeObject);
+        List<TreeObject> list1 = new ArrayList<>();
+        list1.add(treeObject1);
+        list1.add(treeObject2);
+        TreeUtils treeUtils = new TreeUtils(list, list1);
         List<TreeObject> tree = treeUtils.getTreeObjectList();
         System.out.println(tree.get(0));
     }

@@ -8,7 +8,9 @@ import java.util.*;
  * 购物车的模型 加入购物车  删除购物车 修改购物车 清空购物车（购买所有商品）
  */
 public class Cart {
-    private Map<Integer,CartItem> cartItemMap=new LinkedHashMap<>();
+
+   public Map<Integer,CartItem> cartItemMap=new LinkedHashMap<>();
+    //specise代表种类
     public Integer getSpecies(){
         Integer species=0;
         species=cartItemMap.size();

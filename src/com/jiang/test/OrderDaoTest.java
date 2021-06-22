@@ -3,6 +3,7 @@ package com.jiang.test;
 import com.jiang.dao.Impl.OrderDaoImpl;
 //import com.jiang.dao.Impl.OrderListDaoImpl;
 import com.jiang.dao.OrderDao;
+import com.jiang.pojo.Order;
 import com.jiang.pojo.OrderList;
 import org.junit.Test;
 
@@ -20,5 +21,9 @@ public class OrderDaoTest {
         List<OrderList> orders = orderDao.findOrders();
         orders.forEach(System.out::println);
     }
-
+    @Test
+    public void testFindOrderListByUserId(){
+        List<Order> orders =orderDao.finOrdersById(25);
+        orders.forEach(System.out::println);
+    }
 }

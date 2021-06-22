@@ -10,6 +10,9 @@ import java.util.Map;
  *分类的类
  */
 public class ThreeCategory {
+    private String oneId;//一级分类名称
+    private String twoId;//二级分类名称
+    private String threeId;//三级分类名称
     private String cateOne;//一级分类名称
     private String cateTwo;//二级分类名称
     private String cateThree;//三级分类名称
@@ -17,10 +20,37 @@ public class ThreeCategory {
     public ThreeCategory() {
     }
 
-    public ThreeCategory(String cateOne, String cateTwo, String cateThree) {
+    public ThreeCategory(String oneId, String twoId, String threeId, String cateOne, String cateTwo, String cateThree) {
+        this.oneId = oneId;
+        this.twoId = twoId;
+        this.threeId = threeId;
         this.cateOne = cateOne;
         this.cateTwo = cateTwo;
         this.cateThree = cateThree;
+    }
+
+    public String getOneId() {
+        return oneId;
+    }
+
+    public void setOneId(String oneId) {
+        this.oneId = oneId;
+    }
+
+    public String getTwoId() {
+        return twoId;
+    }
+
+    public void setTwoId(String twoId) {
+        this.twoId = twoId;
+    }
+
+    public String getThreeId() {
+        return threeId;
+    }
+
+    public void setThreeId(String threeId) {
+        this.threeId = threeId;
     }
 
     public String getCateOne() {

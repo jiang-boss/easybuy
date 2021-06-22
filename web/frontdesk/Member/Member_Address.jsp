@@ -19,10 +19,11 @@
         <script type="text/javascript" src="static/cityjs/main.js"></script>
 
         <title>尤洪</title>
+
 </head>
-<body>
+<body style="font-size: 12px">
 <!--Begin Header Begin-->
-<%@include file="/common/front/header.jsp"%>
+<%@include file="/common/backend/header.jsp"%>
 <%@include file="/common/front/searchBar.jsp"%>
 
 
@@ -43,7 +44,6 @@
         </div>
     </div>
 </div>
-
 <!--End Header End-->
 <div class="i_bg bg_color">
     <!--Begin 用户中心 Begin -->
@@ -58,6 +58,7 @@
                         <p class="bg-warning"> 收货地址</p>
                     </div>
                 </div>
+
                 <%--                         这里是地址的表单--%>
                 <div class="row">
                     <form class="form-horizontal" action="client/addressServlet" method="get">
@@ -70,36 +71,37 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">所在区域</label>
                             <div class="col-md-8" >
-                                <input type="text"  id="city3" class="form-control" data-toggle="city-picker" />
+                                <input type="text"   id="city3" class="form-control" data-toggle="city-picker" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">详细地址</label>
                             <div class="col-sm-8">
-                                <input type="text" name="address"  class="form-control" id="inputAddress" placeholder="">
+                                <input type="text" name="address"  class="form-control" id="inputAddress" placeholder="请输入详细的地址信息，如道路，门牌号，小区，楼栋，单元等信息">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">邮政编号</label>
                             <div class="col-sm-8">
-                                <input type="text" name="code" class="form-control" id="inputCode" placeholder="">
+                                <input type="text" name="code" class="form-control" id="inputCode" placeholder="请填写邮编">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">收货人姓名</label>
                             <div class="col-sm-8">
-                                <input type="text" name="rename" class="form-control" id="inputName" placeholder="">
+                                <input type="text" name="rename" class="form-control" id="inputName" placeholder="长度不超过25个字符">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">手机号码</label>
                             <div class="col-sm-8">
-                                <input type="text" name="phone" class="col-lg-7 form-control" id="inputtel" placeholder="">
+                                <input type="text" name="phone" class="col-lg-7 form-control" id="inputtel" placeholder="手机号必须填写">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-2  col-sm-offset-9">
-                                <button id="update_sub_address"  class="btn btn-primary ">确认修改</button>
+                            <div class="col-md-2  col-sm-offset-8">
+                                <button id="update_sub_address"  class="btn btn-primary hide" >确认修改</button>
+                                <button id="add_sub_address" class="btn btn-primary" >增加</button>
                             </div>
                         </div>
                     </form>
@@ -155,10 +157,10 @@
     $(function (){
         $(".update_address").click(function (){
             var id=$(this).attr("addressid")
-            // alert(id)
-            // $("#update_Address").modal({
-            //     backdrop:"static"
-            // })
+            //这里转换按钮
+            $(".title").text("")
+            $("#update_sub_address").removeClass("hide")
+            $("#add_sub_address").addClass("hide")
             $.ajax({
                 url:"client/addressServlet",
                 data:"action=updateAddress&id="+id,
@@ -166,12 +168,12 @@
                 dataType:"json",
                 success:function (resq){
                     // alert(resq.address)
-                    alert(resq.region)
-                    $("#city3").attr("placeholder",resq.region)
-                    $("#inputCode").attr("placeholder",resq.code)
-                    $("#inputAddress").attr("placeholder",resq.address)
-                    $("#inputName").attr("placeholder",resq.rename)
-                    $("#inputtel").attr("placeholder",resq.phone)
+                    // alert(resq.region)
+                    $(".title").text(resq.region)
+                    $("#inputCode").val(resq.code)
+                    $("#inputAddress").val(resq.address)
+                    $("#inputName").val(resq.rename)
+                    $("#inputtel").val(resq.phone)
                     $("#AddressIdHide").val(resq.id)
 
                 }
@@ -180,11 +182,11 @@
         $("#update_sub_address").click(function (){
             //修改地址的操作
             // alert($("#city3").attr("placeholder"))
-            alert($(".title").text())
+            // alert($(".title").text()=='')
             var hideAddress= $(".title").text()
             $("#hideAddress").val(hideAddress)
 
-            $(this).submit();
+            // $(this).submit();
         })
     })
 </script>

@@ -17,4 +17,6 @@ public interface OrderService {
     List<OrderList> findOrders();
 
     Order creatOrder(Cart cart, User login,String address);
+
+    List<Order> findOrdersByUserId(int userId);
 }

@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @author jiangboss
  * @create 2021-05-25-22:05
