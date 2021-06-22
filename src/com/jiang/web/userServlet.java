@@ -44,11 +44,12 @@ public class userServlet extends BaseServlet{
         String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
         //处理注册的功能 获取请求参数
-        String username = req.getParameter("user");
+        String username = req.getParameter("userName");//真实姓名
+        String loginName = req.getParameter("loginName");
 //        String pwd = req.getParameter("pwd");
 //        String rpwd = req.getParameter("rpwd");
         String email = req.getParameter("email");
-//        String tel = req.getParameter("tel");
+        String tel = req.getParameter("mobile");
         String code=req.getParameter("code");
 //       System.out.println(user+pwd+rpwd+email+tel);
        //判断是否可以注册 根据验证码判断
@@ -70,9 +71,12 @@ public class userServlet extends BaseServlet{
                 req.getRequestDispatcher("/index.jsp").forward(req,resp);
             }
         }else {
+            System.out.println("验证码错误");
             req.setAttribute("msg","验证码错误！");
             req.setAttribute("user",username);
             req.setAttribute("email",email);
+            req.setAttribute("tel",tel);
+            req.setAttribute("loginName",loginName);
             req.getRequestDispatcher("/frontdesk/User/Regist.jsp").forward(req,resp);
         }
     }
