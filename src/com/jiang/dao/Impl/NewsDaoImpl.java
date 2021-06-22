@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author jiangboss
- * @create 2021-05-25-21:58
+ * @create 2021-05-25-21:58不仅比u不i
  */
 public class NewsDaoImpl extends BaseDao implements NewsDao {
     /**
