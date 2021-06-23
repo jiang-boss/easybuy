@@ -1,6 +1,7 @@
 package com.jiang.web.pre;
 
 import com.google.gson.Gson;
+import com.jiang.pojo.User;
 import com.jiang.pojo.UserAddress;
 import com.jiang.service.Impl.UserAddressServiceImpl;
 import com.jiang.service.UserAddressService;
@@ -42,4 +43,51 @@ public class AddressServlet extends BaseServlet {
         req.getSession().setAttribute("addressList",addressList);
         resp.sendRedirect(req.getHeader("Referer"));
     }
+
+    /**
+     * 设置默认
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void setDefault(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int userid = webUtils.parseInt(req.getParameter("userid"), 0);
+        int addmoren = webUtils.parseInt(req.getParameter("addmoren"), 0);
+        addressService.updateDefaultZero(userid,0);//将用户的
+        System.out.println(userid+":"+addmoren);
+        addressService.updateAddressDefualt(addmoren,1);
+//        req.getRequestDispatcher(req.getContextPath()+"frontdesk/buycar/BuyCar_TWo.jsp").forward(req,resp);
+        System.out.println(req.getContextPath());
+//        resp.sendRedirect(req.getHeader("Referer"));
+        User login = (User)req.getSession().getAttribute("login");
+        List<UserAddress> addressList = addressService.getAddressList(login.getId());
+        req.getSession().setAttribute("addressList",addressList);
+                req.getRequestDispatcher("/frontdesk/buycar/BuyCar_Two.jsp").forward(req,resp);
+
+    }
+
+    /**
+     * 设置默认
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void setDefaultwo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int userid = webUtils.parseInt(req.getParameter("userid"), 0);
+        int addmoren = webUtils.parseInt(req.getParameter("addmoren"), 0);
+        addressService.updateDefaultZero(userid,0);//将用户的
+        System.out.println(userid+":"+addmoren);
+        addressService.updateAddressDefualt(addmoren,1);
+//        req.getRequestDispatcher(req.getContextPath()+"frontdesk/buycar/BuyCar_TWo.jsp").forward(req,resp);
+        System.out.println(req.getContextPath());
+//        resp.sendRedirect(req.getHeader("Referer"));
+        User login = (User)req.getSession().getAttribute("login");
+        List<UserAddress> addressList = addressService.getAddressList(login.getId());
+        req.getSession().setAttribute("addressList",addressList);
+        req.getRequestDispatcher("/frontdesk/Member/Member_Address.jsp").forward(req,resp);
+
+    }
+
 }

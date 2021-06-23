@@ -58,7 +58,6 @@
                         <p class="bg-warning"> 收货地址</p>
                     </div>
                 </div>
-
                 <%--                         这里是地址的表单--%>
                 <div class="row">
                     <form class="form-horizontal" action="client/addressServlet" method="get">
@@ -127,15 +126,20 @@
                                     <th>${address.code}</th>
                                     <th>${address.phone}</th>
                                     <th style="text-align: center">
-                                        <button addressid="${address.id}" type="button" class="btn btn-info update_address">
-                                            <span class="glyphicon glyphicon glyphicon-pencil"
+                                        <button addressid="${address.id}" type="button" class="btn btn-sm btn-info update_address">
+                                            <span class="glyphicon glyphicon glyphicon-pencil "
                                                   aria-hidden="true"  ></span>修改
                                         </button>
-                                        <button type="button" class="btn btn-danger">
+                                        <button type="button" class="btn btn-danger btn-sm">
                                             <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>删除
                                         </button>
                                     </th>
-                                    <th><a class="">设为默认</a></th>
+                                    <c:if test="${address.isDefault=='1'}">
+                                        <th><span class="input-sm bg-info col-md-offset-2" ><a class="moren">默认地址</a></span></th>
+                                    </c:if>
+                                    <c:if test="${address.isDefault=='0'}">
+                                      <th class="show-taggle"><span class="input-small bg-danger col-md-offset-2 glyphicon glyphicon-pencil" style="display: none" id="displaynone"><a userdefaulid="${sessionScope.login.id}" addMoren="${address.id}"  class="moren">设为默认</a></span></th>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                             <tr></tr>
@@ -185,8 +189,19 @@
             // alert($(".title").text()=='')
             var hideAddress= $(".title").text()
             $("#hideAddress").val(hideAddress)
-
             // $(this).submit();
+        })
+
+        $(".show-taggle").mouseover(function (){
+            $(this).find("span").eq(0).show()
+        })
+        $(".show-taggle").mouseout(function (){
+            $(this).find("span").eq(0).hide()
+        })
+        $(".moren").click(function (){
+            var userid=$(this).attr("userdefaulid")
+            var addmoren=$(this).attr("addMoren")
+            location.href="${basepath}client/addressServlet?action=setDefaultwo&userid="+userid+"&addmoren="+addmoren;
         })
     })
 </script>

@@ -46,8 +46,151 @@
     <!--Begin 第二步：确认订单信息 Begin -->
     <div class="content mar_20">
     	<div class="two_bg">
-        	<div class="two_t">
-            	<span class="fr"><a href="frontdesk/buycar/BuyCar.jsp">修改</a></span>商品列表
+            <br/>
+            <div class="container">
+                <div class="row">
+                    <%--            	<span class="fr"><a id="updateAddress"  >修改地址</a></span>确认收货地址--%>
+                    <%--                        <span class="col-md-2 col-md-offset-1">确认收货地址</span>--%>
+                    <div class=" col-md-2"><span class="input-lg bg-info">确认收货地址</span></div>
+                    <div class="col-md-2 col-md-offset-8 ">
+                        <button class="btn btn-danger"  id="updateaddress" ><span
+                                class="glyphicon glyphicon-pencil">修改地址</span>
+                        </button>
+                    </div>
+                    <%--修改的模态框--%>
+                    <div class="modal fade " id="updateModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">修改收货地址</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <%--                         这里是地址的表单--%>
+                                        <div class="row">
+                                            <form class="form-horizontal" action="client/addressServlet" method="get">
+                                                <input type="hidden" name="action" value="updateAddressForm"/>
+                                                <input type="hidden" id="hideAddress" name="region" />
+                                                <input type="hidden" name="userId" value="${sessionScope.login.id}"/>
+                                                <input id="isdefau" type="hidden" name="isDefault"/>
+                                                <input id="AddressIdHide" type="hidden" name="id" value=""/>
+                                                <br/>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">所在区域</label>
+                                                    <div class="col-md-8" >
+                                                        <input type="text" style="width:366.66px ;height: 34px" id="city3" class="form-control" data-toggle="city-picker" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">详细地址</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="address"  class="form-control" id="inputAddress" placeholder="请输入详细的地址信息，如道路，门牌号，小区，楼栋，单元等信息">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">邮政编号</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="code" class="form-control" id="inputCode" placeholder="请填写邮编">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">收货人姓名</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="rename" class="form-control" id="inputName" placeholder="长度不超过25个字符">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">手机号码</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="phone" class="col-lg-7 form-control" id="inputtel" placeholder="手机号必须填写">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-2  col-sm-offset-9">
+                                                        <input type="submit" id="update_sub_address_pre"  class="btn btn-primary " value="保存">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="modal fade" tabindex="-1" id="tishixiugai" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            ...
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-bordered" id="chooseAddress">
+                                <c:forEach items="${sessionScope.addressList}" var="address">
+                                    <c:if test="${address.isDefault == '1'}">
+                                        <tr>
+                                            <th  class="col-md-2"><span  class="glyphicon glyphicon-map-marker"  aria-hidden="true"/>送货至</th>
+                                            <th><input addressid="${address.id}" class="radioss" name="radio" type="radio" checked />&nbsp;&nbsp;<span>${address.region}&nbsp;&nbsp;&nbsp; ${address.address} </span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span> <span class="input-sm bg-warning col-md-offset-2">默认地址</span></th>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test="${address.isDefault !='1'}">
+                                        <tr>
+                                            <th  class="col-md-2"><span  class="glyphicon glyphicon-map-marker hide "  aria-hidden="true"/>送货至</th>
+                                            <th class="show-taggle"><input  addressid="${address.id}" class="radioss" name="radio" type="radio"/>&nbsp;&nbsp;<span> ${address.region}&nbsp;&nbsp;&nbsp;       ${address.address}</span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span><span class="input-sm bg-info col-md-offset-2" id="displaynone" style="display: none"><a userdefaulid="${sessionScope.login.id}" addMoren="${address.id}"  class="moren">设为默认</a></span></th>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </table>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function (){
+                            // $('#tishixiugai').modal('show');
+                            $(".radioss").click(function (){
+                                $(".glyphicon-map-marker").addClass("hide")
+                                $(this).parent().parent().find("th:first-child span").removeClass("hide",1233)
+                                // alert($(this).parent().parent().find("th:first span").text())
+                                // $(".glyphicon-map-marker").attr("style","display:none")
+                                // if ($(this).val()=="on"){
+                                //     $(this).parent().parent().find("th:first span").attr("style","display:block")
+                                // }
+                            })
+                            $(".show-taggle").mouseover(function (){
+                                $(this).find("span").eq(2).show()
+                            })
+
+                            $(".show-taggle").mouseout(function (){
+                                $(this).find("span").eq(2).hide()
+                            })
+                            $(".moren").click(function (){
+                                // xiegaimorn();
+                                // $("#tishixiugai").modal({
+                                //     backdrop: 'static'
+                                // })
+
+                                $('#tishixiugai').modal('show');
+
+                                setTimeout(function(){
+                                    $("#tishixiugai").modal("hide")
+                                },1200);
+
+                                var userid=$(this).attr("userdefaulid")
+                                var addmoren=$(this).attr("addMoren")
+
+                                xiegaimorn(userid,addmoren)
+                            })
+                            function xiegaimorn(userid,addmoren){
+                                location.href="${basepath}client/addressServlet?action=setDefault&userid="+userid+"&addmoren="+addmoren;
+                            }
+                        })
+                    </script>
+                </div>>
+                支付方式
             </div>
             <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
               <tr>
@@ -77,115 +220,8 @@
               </tr>
             </table>
           <br/>
-            <div class="container">
-                <div class="row">
-                    <%--            	<span class="fr"><a id="updateAddress"  >修改地址</a></span>确认收货地址--%>
-                    <%--                        <span class="col-md-2 col-md-offset-1">确认收货地址</span>--%>
-                    <div class=" col-md-2"><span class="input-lg bg-info">确认收货地址</span></div>
-                    <div class="col-md-2 col-md-offset-8 ">
-                        <button class="btn btn-danger"  id="updateaddress" ><span
-                                class="glyphicon glyphicon-pencil">修改地址</span>
-                        </button>
-                    </div>
-                        <%--修改的模态框--%>
-                        <div class="modal fade " id="updateModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">修改收货地址</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container-fluid">
-                                            <%--                         这里是地址的表单--%>
-                                            <div class="row">
-                                                <form class="form-horizontal" action="client/addressServlet" method="get">
-                                                    <input type="hidden" name="action" value="updateAddressForm"/>
-                                                    <input type="hidden" id="hideAddress" name="region" />
-                                                    <input type="hidden" name="userId" value="${sessionScope.login.id}"/>
-                                                    <input id="isdefau" type="hidden" name="isDefault"/>
-                                                    <input id="AddressIdHide" type="hidden" name="id" value=""/>
-                                                    <br/>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">所在区域</label>
-                                                        <div class="col-md-8" >
-                                                            <input type="text" style="width:366.66px ;height: 34px" id="city3" class="form-control" data-toggle="city-picker" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">详细地址</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="address"  class="form-control" id="inputAddress" placeholder="请输入详细的地址信息，如道路，门牌号，小区，楼栋，单元等信息">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">邮政编号</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="code" class="form-control" id="inputCode" placeholder="请填写邮编">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">收货人姓名</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="rename" class="form-control" id="inputName" placeholder="长度不超过25个字符">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">手机号码</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="phone" class="col-lg-7 form-control" id="inputtel" placeholder="手机号必须填写">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-2  col-sm-offset-9">
-                                                            <input type="submit" id="update_sub_address_pre"  class="btn btn-primary " value="保存">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <br/>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover table-bordered" id="chooseAddress">
-                            <c:forEach items="${sessionScope.addressList}" var="address">
-                                <c:if test="${address.isDefault == '1'}">
-                                    <tr>
-                                        <th  class="col-md-2"><span  class="glyphicon glyphicon-map-marker"  aria-hidden="true"/>送货至</th>
-                                        <th><input addressid="${address.id}" class="radioss" name="radio" type="radio" checked />&nbsp;&nbsp;<span>${address.region}&nbsp;&nbsp;&nbsp; ${address.address} </span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span> <span class="input-sm bg-warning col-md-offset-2">默认地址</span></th>
-                                    </tr>
-                                </c:if>
-                                <c:if test="${address.isDefault !='1'}">
-                                    <tr>
-                                        <th  class="col-md-2"><span  class="glyphicon glyphicon-map-marker hide "  aria-hidden="true"/>送货至</th>
-                                        <th><input  addressid="${address.id}" class="radioss" name="radio" type="radio"/>&nbsp;&nbsp;<span> ${address.region}&nbsp;&nbsp;&nbsp;       ${address.address}</span>&nbsp;<span>(${address.rename}&nbsp;收)&nbsp;&nbsp;${address.phone}</span></th>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                        </table>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(function (){
-                        $(".radioss").click(function (){
-                            $(".glyphicon-map-marker").addClass("hide")
-                            $(this).parent().parent().find("th:first-child span").removeClass("hide",1233)
-                            // alert($(this).parent().parent().find("th:first span").text())
-                            // $(".glyphicon-map-marker").attr("style","display:none")
-                            // if ($(this).val()=="on"){
-                            //     $(this).parent().parent().find("th:first span").attr("style","display:block")
-                            // }
-                        })
-                    })
-                </script>
-            </div>>
-            	支付方式
+            <div class="two_t">
+                <span class="fr"><a href="frontdesk/buycar/BuyCar.jsp">修改</a></span>商品列表
             </div>
             <ul class="pay">
                 <li class="checked">支付宝<div class="ch_img"></div></li>
@@ -259,6 +295,10 @@
             // alert($(".title").text())
             $("#hideAddress").val($(".title").text())
         })
+
+
+
+
     })
 </script>
 

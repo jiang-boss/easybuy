@@ -31,4 +31,15 @@ public class UserAddressDaoImpl extends BaseDao implements UserAddressDao {
         update(sql,address.getUserId(),address.getAddress(),address.getCreateTime(),address.getIsDefault(),
                 address.getPhone(),address.getRename(),address.getRegion(),address.getCode(),address.getId());
     }
+
+    @Override
+    public void updateAddressDefaultZreo(Integer userid,Integer i) {
+        String sql="update easybuy_user_address set `isDefault`=? where userId=?";
+        update(sql,i,userid);
+    }
+    @Override
+    public void updateAddressDefault(Integer addmoren, Integer i) {
+        String sql="update easybuy_user_address set `isDefault`=? where id=?";
+        update(sql,i,addmoren);
+    }
 }

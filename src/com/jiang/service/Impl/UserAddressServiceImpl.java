@@ -31,4 +31,16 @@ public class UserAddressServiceImpl implements UserAddressService {
     public void updateAddress(UserAddress address) {
         userAddressDao.updateAddress(address);
     }
+
+    @Override
+    public void updateDefaultZero(int userid, int i) {
+        userAddressDao.updateAddressDefaultZreo(userid,i);
+    }
+
+    @Override
+    public void updateAddressDefualt(int addmoren, int i) {
+        userAddressDao.updateAddressDefault(addmoren,i);
+    }
+
+
 }

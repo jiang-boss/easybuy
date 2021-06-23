@@ -44,13 +44,10 @@
                         }
                     })
                 }
-
             })
             $("#code_img").click(function (){
                 this.src="${basePath}kaptchaServlet?d="+new Date();
             })
-
-
             $("#pwd1").blur(function (){
                 var passwordpat=/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,20}$/
                 var password=$("#pwd1").val();

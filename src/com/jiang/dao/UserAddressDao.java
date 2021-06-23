@@ -16,4 +16,10 @@ public interface UserAddressDao {
     UserAddress queryAddressByid(Integer id);
 
     void updateAddress(UserAddress address);
+
+
+    void updateAddressDefaultZreo(Integer userid, Integer i);
+
+
+    void updateAddressDefault(Integer addmoren, Integer i);
 }
