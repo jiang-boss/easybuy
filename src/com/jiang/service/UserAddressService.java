@@ -16,7 +16,6 @@ public interface UserAddressService {
 
     void updateAddress(UserAddress address);
 
-
     void updateDefaultZero(int userid, int i);
 
     void updateAddressDefualt(int addmoren, int i);

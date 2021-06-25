@@ -58,6 +58,9 @@
                     })
                 }
             })
+
+
+
             //给一级分类的改变绑定事件
             $("#productCategoryLevel1").change(function (){
                 //当前选择的分类的id 一级分类的id  通过这个id 查找对应的二级分类

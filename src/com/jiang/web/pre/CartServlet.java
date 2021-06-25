@@ -142,4 +142,43 @@ public class CartServlet extends BaseServlet {
         String s = gson.toJson(resMap);
         resp.getWriter().write(s);
     }
+
+    protected void addProductAjax3(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("增加多个产品的请求过来");
+        System.out.println(req.getParameter("id"));
+        System.out.println(req.getParameter("num"));
+        //处理增加的操作
+        int id = webUtils.parseInt(req.getParameter("id"), 0);//得到商品项的id 可找到商品信息
+        int num = webUtils.parseInt(req.getParameter("num"), 0);
+
+        Product productById = productService.findProductById(id);
+        //将商品信息转换为商品项  还要判断购物车模型在不在session中 不在创建一个
+        CartItem cartItem=new CartItem(productById.getFileName(),productById.getId(),productById.getName(),productById.getPrice(),productById.getPrice(),1);
+        Cart cart=(Cart) req.getSession().getAttribute("cart");
+        if (cart==null){
+            cart=new Cart();
+            req.getSession().setAttribute("cart",cart);
+        }
+        cart.addProductsTwo(cartItem,num);//添加商品项
+        System.out.println(cart);
+
+        //还需要商品的图片 购物车的数量 还要购物车的总金额
+        req.getSession().setAttribute("name",productById.getName());
+        req.getSession().setAttribute("fileName",productById.getFileName());
+        req.getSession().setAttribute("cartTotal",cart.getCount());
+        req.getSession().setAttribute("totalPrice",cart.getTotalPrice());
+        Map<String,Object> resMap=new HashMap<>();
+        //将购物车中需要的数据 使用json数据发送过去
+        resMap.put("totalCount",cart.getCount());
+//        resMap.put("fileName",productById.getFileName());
+        resMap.put("totalPrice",cart.getTotalPrice());
+        resMap.put("Species",cart.getSpecies());
+//        resMap.put("name",productById.getName());
+//        resMap.put("price",productById.getPrice());
+        //？？？？？怎么传 jsp怎么接受 解析数据
+        resMap.put("cartMaps",cart.getCartItemMap());
+        Gson gson=new Gson();
+        String s = gson.toJson(resMap);
+        resp.getWriter().write(s);
+    }
 }

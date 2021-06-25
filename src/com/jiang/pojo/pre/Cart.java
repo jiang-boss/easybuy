@@ -84,6 +84,22 @@ public class Cart {
     }
 
     /**
+     * 处理增加多个商品
+     * @param cartItem
+     * @param num
+     */
+    public void  addProductsTwo(CartItem cartItem,Integer num){
+        CartItem  item=cartItemMap.get(cartItem.getId());
+        if (item==null){//没有商品先添加一个再修改
+            cartItemMap.put(cartItem.getId(),cartItem);
+            updateCount(cartItem.getId(),num);
+        }else {
+            //如果有此商品  在原有的商品数量的基础上增加num
+            updateCount(cartItem.getId(),num);
+        }
+    }
+
+    /**
      * 清空购物车
      */
     public void clear(){
@@ -116,7 +132,6 @@ public class Cart {
             }
         }
     }
-
 
     @Override
     public String toString() {

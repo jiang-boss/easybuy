@@ -20,9 +20,6 @@
         $(function (){
             $(".j_car").click(function (){
                 <%--alert("${pageScope.basepath}")--%>
-                // $("#addSuccess").modal({
-                //     backdrop:'static'
-                // })
                 alert("添加商品成功！")
                 //这里发送请求给服
                 var id=$(this).attr("cartItemid")
@@ -38,11 +35,6 @@
                     $(".priceTotal").text(data.totalPrice)
                 })
             })
-
-            <%--$(".imgproduct").click(function (){--%>
-            <%--      var id = $(this).attr("productId")--%>
-            <%--    location.href="${pageScope.basepath}"--%>
-            <%--})--%>
         })
     </script>
 </head>

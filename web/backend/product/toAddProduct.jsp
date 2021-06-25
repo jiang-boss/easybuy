@@ -157,7 +157,7 @@
                             <img id="fileImg" src="files/${requestScope.product.fileName}" width="50" height="50"/>
                         </c:if>
                         <input type="button" value="选择文件" onclick="javascript:$('input[name=\'file\']').click();" />
-                        <input name="fileName" id="lololo" readonly />
+<%--                        <input name="fileName" id="lololo" readonly />--%>
                         <input type="file" id="filesAdd" name="file" style="border: hidden; display: none;" onchange="javascript:$('input[name=\'fileName\']').val(this.files[0].name);" />
                     </td>
                 </tr>
