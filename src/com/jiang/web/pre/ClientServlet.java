@@ -95,6 +95,27 @@ public class ClientServlet extends BaseServlet{
         req.getRequestDispatcher("/frontdesk/category/categoryList.jsp").forward(req,resp);
     }
 
+    protected void pagecategoryLike(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("请求过来了");
+        //得到商品的三级id 通过这个id找商品
+//        int id = webUtils.parseInt(req.getParameter("id"), 1);
+        String likePro = req.getParameter("LikePro");
+        int pageNum = webUtils.parseInt(req.getParameter("pageNum"), 1);
+        int pageSize = webUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+//        System.out.println(id);
+//        System.out.println(pageNum);
+//        System.out.println(pageSize);
+        Page<Product> products=productService.findProductPageByLike(pageNum,pageSize,likePro);
+        System.out.println( "总页数是："+products.getPageTotal());
+        System.out.println("总数量是："+products.getPageTotalCount());//总共的数量
+        //得到分级下面的商品
+        products.setUri("client/clientServlet?action=pagecategory");
+        req.setAttribute("pages",products);
+        req.setAttribute("likePro",likePro);
+        req.getRequestDispatcher("/frontdesk/category/categoryList.jsp").forward(req,resp);
+    }
+
+
     /**
      * 这里处理模糊搜索回显得数据
      * @param req

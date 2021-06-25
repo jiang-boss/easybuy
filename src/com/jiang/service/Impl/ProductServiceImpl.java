@@ -92,6 +92,30 @@ public class ProductServiceImpl implements ProductService {
         return page;
     }
 
+    @Override
+    public Page<Product> findProductPageByLike(int pageNum, int pageSize, String likePro) {
+
+        Page<Product> page=new Page<>();
+        page.setPageSize(pageSize);//设置每页显示的大小
+        //得到当前分类下的商品总数
+        String sl="%"+likePro+"%";
+        Integer pageTotalCount = productDao.queryProductCountById3Like(sl);//获取当前的总数据的条数
+        page.setPageTotalCount(pageTotalCount);
+        //求出总页码
+        Integer pageTotal=pageTotalCount/Page.PAGE_SIZE;
+        if(pageTotalCount%Page.PAGE_SIZE>0){
+            pageTotal+=1;
+        }
+        //设置总页码
+        page.setPageTotal(pageTotal);
+        page.setPageNum(pageNum);//设置当前页码
+        //设置当前的页面的索引
+        Integer begin=(page.getPageNum()-1)*pageSize;
+        List<Product> products = productDao.queryForProductById3Like(begin,pageSize,sl);
+        page.setItems(products);
+        return page;
+    }
+
 //    /**
 //     * 这里将商品的每个一级分类分开的得到下面的产品
 //     * @return
@@ -103,4 +127,6 @@ public class ProductServiceImpl implements ProductService {
 //
 //        return  null;
 //    }
+
+
 }

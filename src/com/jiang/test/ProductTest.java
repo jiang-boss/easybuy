@@ -4,6 +4,7 @@ import com.jiang.dao.Impl.ProductDaoImpl;
 import com.jiang.dao.ProductDao;
 import com.jiang.pojo.Product;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.List;
 
@@ -74,5 +75,13 @@ public void queryFroPage() {
         List<Product> products = productdao.queryForProductById3(1,4,655);
         products.forEach(System.out::println);
     }
+    @Test
+    public void  test6(){
+        System.out.println(productdao.queryProductCountById3Like("%香%"));
+    }
 
+    @Test
+    public void  test36(){
+        System.out.println(productdao.queryForProductById3Like(1,4,"%香%"));
+    }
 }

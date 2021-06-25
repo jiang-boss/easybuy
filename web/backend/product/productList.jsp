@@ -9,7 +9,6 @@
     <script type="text/javascript" src="static/js/jquery.bxslider_e88acd1b.js"></script>
     <script type="text/javascript" src="static/js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="static/js/menu.js"></script>
-
     <script type="text/javascript" src="static/js/select.js"></script>
   <script type="text/javascript">
     $(function (){

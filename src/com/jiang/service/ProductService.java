@@ -19,5 +19,7 @@ public interface ProductService {
    Page<Product> findProductPage(int pageNum, int pageSize);
 
     Page<Product> findProductPageByLevel3Id(int pageNum,int pageSize,int id);
+
+    Page<Product> findProductPageByLike(int pageNum, int pageSize, String likePro);
 //    Map<Integer,List<Product>> findProductFloor();
 }

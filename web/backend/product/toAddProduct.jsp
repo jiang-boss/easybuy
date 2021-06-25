@@ -157,7 +157,7 @@
                             <img id="fileImg" src="files/${requestScope.product.fileName}" width="50" height="50"/>
                         </c:if>
                         <input type="button" value="选择文件" onclick="javascript:$('input[name=\'file\']').click();" />
-                        <input name="fileName" readonly />
+                        <input name="fileName" id="lololo" readonly />
                         <input type="file" id="filesAdd" name="file" style="border: hidden; display: none;" onchange="javascript:$('input[name=\'fileName\']').val(this.files[0].name);" />
                     </td>
                 </tr>
@@ -176,7 +176,7 @@
                 <tr>
                     <td width="135" align="right">描述</td>
                     <td>
-                        <textarea name="description">${requestScope.product.description}</textarea>
+                        <textarea id="discriptionsss" name="description">${requestScope.product.description}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -199,11 +199,22 @@
 <script type="text/javascript">
     $(function (){
         $("#btnadd").click(function (){
-            return confirm("确认添加"+$("#name").val()+"吗?")
+            // alert(($("#productCategoryLevel1").val()=="")||($("#productCategoryLevel2").val()=="")||($("#productCategoryLevel2").val()==""))
+            // if (($("#productCategoryLevel1").val()=="")||($("#fileImg").val()=="")||($("#productCategoryLevel2").val()=="")||($("#productCategoryLevel2").val()=="") ||($("#name").val()=="")||($("#price").val()=="")||($("#stock").val()=="")||($("#discriptionsss").val()=="")){
+                if (($("#productCategoryLevel1").val()=="")||($("#lololo").val()=="")||($("#productCategoryLevel2").val()=="") ||($("#productCategoryLevel3").val()=="") ||($("#name").val()=="")||($("#price").val()=="")||($("#stock").val()=="")||($("#discriptionsss").val()=="")){
+                    alert("请填写完整的商品信息")
+                return false;
+            }else {
+                return confirm("确认添加"+$("#name").val()+"吗?")
+            }
         })
         $("#btnupdate").click(function (){
-            // alert($("#productCategoryLevel1").val())
-            return confirm("确认修改商品吗？")
+            if (($("#productCategoryLevel1").val()=="")||($("#productCategoryLevel2").val()=="") ||($("#productCategoryLevel3").val()=="") ||($("#name").val()=="")||($("#price").val()=="")||($("#stock").val()=="")||($("#discriptionsss").val()=="")){
+                alert("请填写正确的商品信息")
+                return false;}
+            else {
+                return confirm("确认修改商品吗？")
+            }
         })
         $("#filesAdd").change(function (){
             $("#fileImg").show()

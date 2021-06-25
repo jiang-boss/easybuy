@@ -9,8 +9,9 @@
 <div class="top">
     <div class="logo"><a href="index.jsp"><img src="static/images/logo.png" /></a></div>
     <div class="search">
-        <form action="client/clientServlet">
-            <input type="text" value="" class="s_ipt" />
+        <form action="client/clientServlet" method="get">
+            <input type="hidden" name="action" value="pagecategoryLike" >
+            <input type="text" name="LikePro" value="" class="s_ipt" />
             <input type="submit" value="搜索" class="s_btn" />
         </form>
     </div>

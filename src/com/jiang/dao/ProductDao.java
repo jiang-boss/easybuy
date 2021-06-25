@@ -17,8 +17,10 @@ public interface ProductDao {
     Integer queryProductCount();
     List<Product> queryProductList();
     List<Product> queryForPageProduct(Integer begin,Integer pageSize);
-
     List<Product> queryForProductById3(Integer begin,Integer pageSize,Integer id);
-
     Integer queryProductCountById3(Integer id);
+//模糊总数
+    Integer queryProductCountById3Like(String likePro);
+//模糊集合
+    List<Product> queryForProductById3Like(Integer begin, int pageSize, String likePro);
 }

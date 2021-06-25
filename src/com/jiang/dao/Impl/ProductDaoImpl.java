@@ -45,7 +45,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
                 "from easybuy_product where id=?";
         return queryForOne(Product.class, sql, id);
     }
-
     /**
      *
      * @return 返回所有商品的数量
@@ -56,7 +55,6 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
         Number number=(Number)queryForSingleValue(sql);
         return number.intValue();
     }
-
     @Override
     public List<Product> queryProductList() {
         String sql="select `id`,`name`,`description`,`price`,`stock`,`categoryLevel1Id`,`categoryLevel2Id`,`categoryLevel3Id`,`fileName`,`isDelete` " +
@@ -85,11 +83,24 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
                 " where categoryLevel3Id=? limit ?,?";
         return qureyForList(Product.class, sql,id,begin, pageSize);
     }
-
     @Override
     public Integer queryProductCountById3(Integer id) {
         String sql="select count(*) from easybuy_product where categoryLevel3Id=? ";
         Number number=(Number)queryForSingleValue(sql,id);
         return number.intValue();
+    }
+    //，迷糊查询
+
+    @Override
+    public Integer queryProductCountById3Like(String likePro) {
+        String sql="select count(*) from easybuy_product where name like ? ";
+        Number number=(Number)queryForSingleValue(sql,likePro);
+        return number.intValue();
+    }
+    @Override
+    public List<Product> queryForProductById3Like(Integer begin, int pageSize, String likePro) {
+        String sql="select `id`,`name`,`description`,`price`,`stock`,`categoryLevel1Id`,`categoryLevel2Id`,`categoryLevel3Id`,`fileName`,`isDelete` from easybuy_product" +
+                " where name like ? limit ?,?";
+        return qureyForList(Product.class, sql,likePro,begin, pageSize);
     }
 }

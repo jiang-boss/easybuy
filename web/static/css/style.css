@@ -1037,7 +1037,7 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 
 /*---------------登录、注册---------------*/
 .log_bg{
-	width:100%; min-width:1200px; height:840px; overflow:hidden; background-color:#fff4ef;
+	width:100%; min-width:1200px; height:880px; overflow:hidden; background-color:#fff4ef;
 }
 .login{
 	width:1200px; overflow:hidden; margin-top:45px;
@@ -1049,7 +1049,7 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 	width:455px; height:385px; overflow:hidden; background-color:#FFF; float:right; display:inline; margin-top:40px; margin-right:10px; margin-bottom:10px; -webkit-box-shadow:0 0 5px #e0e0e0; -moz-box-shadow:0 0 5px #e0e0e0; box-shadow:0 0 5px #e0e0e0; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;
 }
 .l_user{
-	width:267px; height:38px; line-height:38px\9; overflow:hidden; background:url(../images/i_u.png) no-repeat 285px center; background-color:#FFF; color:#888888; font-size:14px; font-family:"Microsoft YaHei"; padding:0 40px 0 10px; border:1px solid #cccccc;
+	width:267px; height:35px; line-height:38px\9; overflow:hidden; background:url(../images/i_u.png) no-repeat 285px center; background-color:#FFF; color:#888888; font-size:14px; font-family:"Microsoft YaHei"; padding:0 40px 0 10px; border:1px solid #cccccc;
 }
 .l_pwd{
 	width:267px; height:38px; line-height:38px\9; overflow:hidden; background:url(../images/i_pwd.png) no-repeat 285px center; background-color:#FFF; color:#888888; font-size:14px; font-family:"Microsoft YaHei"; padding:0 40px 0 10px; border:1px solid #cccccc;
@@ -1077,11 +1077,8 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 	width:1200px; overflow:hidden;
 }
 .reg_c{
-	width:475px; height:625px; overflow:hidden; background-color:#FFF; float:right; display:inline; margin-top:0; margin-right:10px; margin-bottom:10px; -webkit-box-shadow:0 0 5px #e0e0e0; -moz-box-shadow:0 0 5px #e0e0e0; box-shadow:0 0 5px #e0e0e0; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;
+	width:475px; height:675px;overflow:hidden; background-color:#FFF; float:right; display:inline; margin-top:0; margin-right:10px; margin-bottom:10px; -webkit-box-shadow:0 0 5px #e0e0e0; -moz-box-shadow:0 0 5px #e0e0e0; box-shadow:0 0 5px #e0e0e0; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;
 }
-
-
-
 
 
 /*---------------分类页面---------------*/

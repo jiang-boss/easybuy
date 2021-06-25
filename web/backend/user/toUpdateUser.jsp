@@ -130,14 +130,14 @@
                         <td colspan="3" style="font-family:'宋体';">
                             <input id="addlogin" type="text" value="${requestScope.user.loginName}" class="add_ipt" name="loginName"/>
                             <input type="hidden" value="${requestScope.user.id}" name="id">
-                            <span id="errormsgs" ></span>
+                            <span id="errormsgs"  style="color: red"></span>
                         </td>
                     </tr>
                     <tr>
                         <td width="135" align="right">真实姓名</td>
                         <td>
                             <input id="addname" type="text" value="${requestScope.user.userName}" class="add_ipt" name="userName"/>
-                            <span id="errormsgname" ></span>
+                            <span id="errormsgname" style="color: red" ></span>
                         </td>
                     </tr>
 
@@ -145,7 +145,7 @@
                         <td width="135" align="right">密码</td>
                         <td>
                             <input id="addpwd" type="password" value="${requestScope.user.password}" class="add_ipt" name="password"/>
-                            <span id="errormsgs1" ></span>
+                            <span id="errormsgs1" style="color: red" ></span>
                         </td>
                     </tr>
                     <c:if test="${param.method =='adduser'}">
@@ -153,7 +153,7 @@
                             <td width="135" align="right">确认密码</td>
                             <td>
                                 <input id="addrpwd" type="password" value="" class="add_ipt" name="repPassword"/>
-                                <span id="errormsgs2" ></span>
+                                <span id="errormsgs2" style="color: red"></span>
                             </td>
                         </tr>
                     </c:if>
@@ -161,7 +161,7 @@
                         <td width="135" align="right">身份证号</td>
                         <td>
                             <input type="text" value="${requestScope.user.identityCode}" class="add_ipt" name="identityCode" id="identityCode"/>
-                            <span id="errormsgsident" ></span>
+                            <span id="errormsgsident" style="color: red"></span>
                         </td>
                     </tr>
                     <tr>
@@ -177,14 +177,14 @@
                         <td width="135" align="right">电子邮箱</td>
                         <td>
                             <input type="text" value="${requestScope.user.email}" class="add_ipt" name="email" id="email"/>
-                            <span id="errormsgemail" ></span>
+                            <span id="errormsgemail"  style="color: red"></span>
                         </td>
                     </tr>
                     <tr>
                         <td width="135" align="right">手机</td>
                         <td>
                             <input type="text" value="${requestScope.user.mobile}" class="add_ipt" name="mobile" id="mobile"/>
-                            <span id="errorphone" ></span>
+                            <span  id="errorphone" style="color: red"></span>
                         </td>
                     </tr>
                     <tr>

@@ -84,7 +84,7 @@
             })
             //给提交按钮绑定事件
             $("#subbtn").click(function (){
-               if( ($("#changecate").val())==0){
+               if( ($("#changecate").val()==0)||($("#bitian").val()=="")){
                    alert("请添加分类信息!")
                    return false;
                }
@@ -141,7 +141,7 @@
                         <tr>
                             <td align="right">分类名称</td>
                             <td style="font-family:'宋体';">
-                                <input type="text" name="name" value="" class="add_ipt" id="name"/>（必填）
+                                <input type="text" id="bitian" name="name" value="" class="add_ipt" id="name"/>（必填）
                                 <input type="hidden" name="id" value="" id="id">
                             </td>
                         </tr>

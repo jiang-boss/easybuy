@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
-
 /**
  * @author jiangboss
  * @create 2021-06-02-17:20
@@ -52,6 +51,7 @@ public class CartServlet extends BaseServlet {
         Map<String,Object> resMap=new HashMap<>();
         //将购物车中需要的数据 使用json数据发送过去
 
+
         resMap.put("totalCount",cart.getCount());
 //        resMap.put("fileName",productById.getFileName());
         resMap.put("totalPrice",cart.getTotalPrice());
@@ -82,7 +82,6 @@ public class CartServlet extends BaseServlet {
         }
         resp.sendRedirect(req.getHeader("Referer"));
     }
-
     /**
      * 修改商品的的操作
      * @param req
@@ -102,7 +101,6 @@ public class CartServlet extends BaseServlet {
         }
         resp.sendRedirect(req.getHeader("Referer"));
     }
-
 
     /***********************************************************************************************************************************************/
 
@@ -132,7 +130,6 @@ public class CartServlet extends BaseServlet {
         req.getSession().setAttribute("totalPrice",cart.getTotalPrice());
         Map<String,Object> resMap=new HashMap<>();
         //将购物车中需要的数据 使用json数据发送过去
-
         resMap.put("totalCount",cart.getCount());
 //        resMap.put("fileName",productById.getFileName());
         resMap.put("totalPrice",cart.getTotalPrice());
